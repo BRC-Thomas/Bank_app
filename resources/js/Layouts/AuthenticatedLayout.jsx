@@ -5,6 +5,11 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 import { GoHomeFill } from "react-icons/go";
+import { FaWallet } from "react-icons/fa";
+import { TbFileInvoice } from "react-icons/tb";
+import { IoAnalytics } from "react-icons/io5";
+import {HiUserGroup } from "react-icons/hi";
+import { BsGearFill } from "react-icons/bs";
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -17,14 +22,59 @@ export default function Authenticated({ user, header, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo />
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div className="hidden space-x-8 gap-8 mt-2 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    <GoHomeFill
+                                        className={'w-6 h-6 mb-2 mx-auto'}
+                                        style={{ color: route().current('dashboard') ? '#4f46e5' : '#cecece' }}
+                                    />
                                    <p>Dashboard</p>
                                 </NavLink>
+
+                                <NavLink href='#' active={route().current('invoice')}>
+                                    <TbFileInvoice
+                                        className={'w-6 h-6 mb-2  mx-auto'}
+                                        style={{ color: route().current('invoice') ? '#4f46e5' : '#cecece' }}
+                                    />
+                                    <p>Invoice</p>
+                                </NavLink>
+
+                                <NavLink href='#' active={route().current('wallet')}>
+                                    <FaWallet
+                                        className={'w-5 h-6 mb-2 mx-auto'}
+                                        style={{ color: route().current('wallet') ? '#4f46e5' : '#cecece' }}
+                                    />
+                                    <p>Wallet</p>
+                                </NavLink>
+
+                                <NavLink href='#' active={route().current('community')}>
+                                    <HiUserGroup
+                                        className={'w-6 h-6 mb-2 mx-auto'}
+                                        style={{ color: route().current('community') ? '#4f46e5' : '#cecece' }}
+                                    />
+                                    <p>Community</p>
+                                </NavLink>
+
+                                <NavLink href='#' active={route().current('Analytics')}>
+                                    <IoAnalytics
+                                        className={'w-6 h-6 mb-2 mx-auto'}
+                                        style={{ color: route().current('Analytics') ? '#4f46e5' : '#cecece' }}
+                                    />
+                                    <p>Analytics</p>
+                                </NavLink>
+
+                                <NavLink href='#' active={route().current('Settings')} className={'hidden md:block'}>
+                                    <BsGearFill
+                                        className={'w-6 h-6 mb-2 mx-auto'}
+                                        style={{ color: route().current('Settings') ? '#4f46e5' : '#cecece' }}
+                                    />
+                                    <p>Analytics</p>
+                                </NavLink>
+
                             </div>
                         </div>
 
@@ -93,9 +143,23 @@ export default function Authenticated({ user, header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
+
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink href='#' active={route().current('invoice')}>
+                            Invoice
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href='#' active={route().current('Wallet')}>
+                            Wallet
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href='#' active={route().current('community')}>
+                            Community
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href='#' active={route().current('analytics')}>
+                            Analytics
+                        </ResponsiveNavLink>
+
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200">
