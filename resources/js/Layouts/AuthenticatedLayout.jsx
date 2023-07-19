@@ -20,9 +20,15 @@ export default function Authenticated({ user, header, children }) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="shrink-0 flex items-center">
+                            <div className="flex items-center leading-4 mt-4 pr-6 sm:shrink-0 sm:border-r-2 sm:w-fit">
                                 <Link href="/">
-                                    <ApplicationLogo />
+                                    <div className="flex ">
+                                    <ApplicationLogo/>
+                                        <p className={'hidden sm:block'}>
+                                            <span className={'font-black tracking-tighter '}>BankBoard</span><br/>
+                                            <span className={'font-medium text-gray-400'}>Love is in the bank.</span>
+                                        </p>
+                                    </div>
                                 </Link>
                             </div>
 
@@ -59,7 +65,7 @@ export default function Authenticated({ user, header, children }) {
                                     <p>Community</p>
                                 </NavLink>
 
-                                <NavLink href='#' active={route().current('Analytics')}>
+                                <NavLink href='#' active={route().current('Analytics')} className={'hidden md:block  '}>
                                     <IoAnalytics
                                         className={'w-6 h-6 mb-2 mx-auto'}
                                         style={{ color: route().current('Analytics') ? '#4f46e5' : '#cecece' }}
@@ -67,12 +73,12 @@ export default function Authenticated({ user, header, children }) {
                                     <p>Analytics</p>
                                 </NavLink>
 
-                                <NavLink href='#' active={route().current('Settings')} className={'hidden md:block'}>
+                                <NavLink href='#' active={route().current('Settings')} className={'hidden lg:block'}>
                                     <BsGearFill
                                         className={'w-6 h-6 mb-2 mx-auto'}
                                         style={{ color: route().current('Settings') ? '#4f46e5' : '#cecece' }}
                                     />
-                                    <p>Analytics</p>
+                                    <p>Settings</p>
                                 </NavLink>
 
                             </div>
@@ -158,6 +164,10 @@ export default function Authenticated({ user, header, children }) {
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href='#' active={route().current('analytics')}>
                             Analytics
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink href='#' active={route().current('analytics')}>
+                            Settings
                         </ResponsiveNavLink>
 
                     </div>
