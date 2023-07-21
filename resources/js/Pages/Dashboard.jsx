@@ -1,6 +1,11 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { FaBeer } from 'react-icons/fa';
+import Card from '../Components/Card/Card';
+import CreditCard from '../Components/CreditCard/CreditCard';
+import Title from '../Components/Card/Title.jsx';
+import Subtitle from '../Components/Card/Subtitle.jsx';
+import './Dashboard.css'
 
 export default function Dashboard({ auth }) {
     return (
@@ -13,25 +18,29 @@ export default function Dashboard({ auth }) {
             <div className="py-6 sm:py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
+                    <div className="px-2 block sm:grid grid-cols-3 grid-rows-3 gap-2 sm:px-4 sm:grid-cols-12 md:grid-cols-11 md:grid-row-12 lg:grid-cols-14 lg:grid-rows-5 lg:gap-2 ">
 
-                   <div className="block sm:grid sm:gap-2 md:grid-cols-11 md:grid-row-12 grid-cols-4 grid-rows-3 lg:grid-cols-4 lg:grid-rows-5 lg:gap-4 ">
-                        <div className="bg-blue-200 mb-3 sm:my-0 sm:col-span-4 {/*sm:h-[150px]*/} md:col-start-2 md:col-span-3 lg:col-end-1">1</div>
-                        <div className="bg-blue-200 my-3 sm:my-0 sm:col-span-2 {/*sm:h-[150px]*/} md:col-span-3 lg:col-start-2 lg:col-end-2">2</div>
-                        <div className="bg-blue-200 my-3 sm:my-0 sm:col-span-2 {/*sm:h-[150px]*/} md:col-span-3 lg:col-start-3 lg:col-end-3">3</div>
+                        <div className="sm:col-span-4 md:col-start-2 md:col-span-3 lg:col-start-1 lg:col-span-2 ">
+                            <Card title={'Total Revenue'} subtitle={'Close target'} />
+                        </div>
+                        <div className="my-2 sm:my-0 sm:col-span-4 md:col-start-5 md:col-span-3 log:col-start-3 lg:col-span-2">
+                            <Card title={'Invoices'} subtitle={'Average'}/>
+                        </div>
+                        <div className="my-2 sm:my-0 sm:col-span-4 md:col-start-8 md:col-span-3 log:col-start-5 lg:col-span-2">
+                            <Card title={'Total Saves'} subtitle={'In Draft'}/>
+                        </div>
 
-                        <div className="bg-red-400 my-3 sm:my-0 {/*h-[400px]*/} col-span-full lg:row-span-full lg:col-start-4">4</div>
 
-                        <div className="bg-green-400 my-3 sm:my-0 sm:col-span-2 md:col-span-full md:row-end-4         lg:row-start-2 lg:col-span-3">5</div>
-                        <div className="bg-green-400 my-3 sm:my-0  sm:col-span-2  md:col-span-full lg:col-span-3 lg:row-start-4 lg:row-end-6      ">6</div>
+                        <div className="hidden lg:block bg-red-400 my-3 sm:my-0 col-span-full lg:row-span-full lg:col-start-7">
+                            <div className=" flex-col max-w-[80vw] mx-auto items-end justify-between rounded-lg border border-gray-100 bg-white p-4 relative sm:max-w-full">
+                                <Title title={'Your card'} />
+                                <CreditCard/>
+                            </div>
+                        </div>
+
+                        <div className="bg-green-400 my-3 sm:my-0 sm:col-span-full md:col-span-full md:row-end-4 lg:row-span-2 lg:col-end-7">5</div>
+                        <div className="bg-green-400 my-3 sm:my-0  sm:col-span-full  md:col-span-full lg:row-span-2 lg:col-end-7     ">6</div>
                     </div>
-
-
-                    {/* <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 mt-4 text-gray-900">DIV insideCOMPONENTS</div>
-                    </div>*/}
-                  {/*  <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
-                        <div className="p-6 mt-4 text-gray-900">DIV insideCOMPONENTS</div>
-                    </div>*/}
                 </div>
             </div>
         </AuthenticatedLayout>
