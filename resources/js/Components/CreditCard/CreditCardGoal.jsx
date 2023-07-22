@@ -7,14 +7,14 @@ export default function CreditCardGoal({title, date, stats}){
 
     return (
         <>
-            <article className='flex'>
+            <article className='flex px-4 py-2 rounded-2xl'>
                 <div  className='flex items-center w-full py-2'>
-                    <div className='w-full '>
+                    <div className='w-1/2'>
                         <Title title={title} className='text-black text-md'/>
                         <Subtitle subtitle={date} className='text-[12px] ' />
                     </div>
                    <div className= 'w-1/2'>
-                    <Stats stats={stats}/>
+                       <Stats stats={stats} />
                    </div>
                 </div>
 

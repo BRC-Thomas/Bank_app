@@ -37,8 +37,10 @@ export default function CreditCradInfo() {
                         <Title title='Total Goals'/>
                         <Dot/>
                     </div>
-                    <div>
+                    <div className='justify-between [&>*:nth-child(even)]:bg-slate-100/80'>
                         <CreditCardGoal title={'StartUp Plan'} date={'Thu 26 Jan'} stats={[6,3,1,8,1]}/>
+                        <CreditCardGoal title={'Wedding'} date={'Sun 22 Dec'} stats={[5,6,8,9,3]}/>
+                        <CreditCardGoal title={'South Korea'} date={'Mon 18 Nov'} stats={[10,1,4,1,5]}/>
                     </div>
                 </div>
             </section>

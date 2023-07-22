@@ -1,22 +1,17 @@
+// Stats.jsx
 export default function Stats({stats}) {
-    //console.log(stats)
-
     return (
-        <div>
-            <span id="ProgressLabel" className="sr-only">Stats</span>
+        <div className={' flex '}>
 
-            <span
-                role="progressbar"
-                aria-labelledby="ProgressLabel"
-                aria-valuenow="75"
-                className="block rounded-full h-2 bg-gray-200 -rotate-90"
-            >
-    <span
-        className="block h-2 rounded-full bg-indigo-600"
-        style={{'width' : '75%'}}
-    ></span>
-  </span>
+            {stats.map((stat, index) => {
+                return (
+                    <div className="ml-2 flex flex-col items-center justify-center rotate-180">
+                        <div className="h-12 w-2 overflow-hidden rounded-md bg-gray-200">
+                            <div className="h-full bg-indigo-600/80 rounded-full" style={{'height': `${stat * 10}%`}}></div>
+                        </div>
+                    </div>
+                )
+            })}
         </div>
     );
-
 }

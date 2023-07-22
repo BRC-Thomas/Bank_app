@@ -6,6 +6,8 @@ import Title from '../Components/Card/Title.jsx';
 import CreditCardInfo from '../Components/CreditCard/CreditCardContent.jsx';
 import Dot from '../Components/Card/Dot.jsx';
 import './Dashboard.css'
+import ChartFullComponent from "@/Components/Chart/ChartFullComponent.jsx";
+import Invoice from "@/Components/Invoice/Invoice.jsx";
 
 export default function Dashboard({auth}) {
     return (
@@ -26,7 +28,7 @@ export default function Dashboard({auth}) {
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-5 md:col-span-3 log:col-start-3 lg:col-span-2">
-                            <Card title={'Invoices'} subtitle={'Average'}/>
+                            <Card title={'Invoice'} subtitle={'Average'}/>
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-8 md:col-span-3 log:col-start-5 lg:col-span-2">
@@ -37,8 +39,8 @@ export default function Dashboard({auth}) {
                         <div
                             className="hidden lg:block my-3 sm:my-0 col-span-full lg:row-span-full lg:col-start-7 ml-2">
                             <div
-                                className=" flex-col max-w-[80vw] mx-auto items-end justify-between rounded-lg border border-gray-100 bg-white p-4 relative sm:max-w-full">
-                                <div>
+                                className=" flex-col max-w-[80vw] mx-auto items-end justify-between rounded-lg border border-gray-100 bg-white px-4 py-2 relative sm:max-w-full">
+                                <div className={'px-4'}>
                                     <Title title={'Your card'}/>
                                     <Dot className={'absolute top-2 right-8'}/>
                                 </div>
@@ -48,10 +50,12 @@ export default function Dashboard({auth}) {
                         </div>
 
                         <div
-                            className="bg-green-400 my-3 sm:my-0 sm:col-span-full md:col-span-full md:row-end-4 lg:row-span-2 lg:col-end-7">5
+                            className="my-3 sm:my-0 sm:col-span-full md:col-span-full md:row-end-3 lg:row-span-2 lg:col-end-7 w-full">
+                            <ChartFullComponent/>
                         </div>
                         <div
-                            className="bg-green-400 my-3 sm:my-0  sm:col-span-full  md:col-span-full lg:row-span-2 lg:col-end-7     ">6
+                            className="my-3 sm:my-0  sm:col-span-full  md:col-span-full lg:row-span-2 lg:col-end-7">
+                            <Invoice />
                         </div>
                     </div>
                 </div>
