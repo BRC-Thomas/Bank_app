@@ -5,7 +5,7 @@ export default function Card({title, subtitle}){
 
     return (
         <>
-        <article
+        <section
             className="relatvie flex-col max-w-[80vw] mx-auto items-end justify-between rounded-lg border border-gray-100 bg-white p-4 relative sm:max-w-full"
         >
             <div className='flex justify-between items-center'>
@@ -38,7 +38,7 @@ export default function Card({title, subtitle}){
                     </svg>
                 </div>
             </div>
-        </article>
+        </section>
         </>
     )
 }
