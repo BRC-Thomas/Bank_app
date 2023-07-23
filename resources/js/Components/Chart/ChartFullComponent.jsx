@@ -5,7 +5,7 @@ import Subtitle from "@/Components/Card/Subtitle.jsx";
 export default function ChartFullComponent(){
 
     return (
-        <section className='bg-white p-4 px-6 sm:-mt-32 lg:-mt-10 rounded-lg'>
+        <section className='bg-white p-4 px-6 sm:-mt-36 lg:-mt-10  rounded-lg'>
             <div className='flex justify-between items-center'>
                 <Title title='Analitics Report' className='mb-4' />
                 <div className='flex gap-4'>

@@ -3,12 +3,13 @@ import Title from "@/Components/Card/Title.jsx";
 export default function Invoice() {
 
     return (
-        <div className="relative overflow-x-auto bg-white rounded-lg">
+        <div className="relative overflow-x-auto bg-white rounded-lg sm:-mt-10 lg:mt-0">
             <div className='flex justify-between items-center px-4 py-2'>
-                <Title title='Analitics Report' className=''/>
+                <Title title='Recent Invoice' className=''/>
                 <div>
-                    <button>dowlonad</button>
-                    <button>view report</button>
+                   {/* <button>downlonad</button>
+                    <button>view report</button>*/}
+                    {/* TODO BUTTON*/}
                 </div>
             </div>
             <table className="w-full text-sm text-left text-gray-500">
