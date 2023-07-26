@@ -1,8 +1,8 @@
 import Dot from './Dot.jsx'
 import Title from "./Title.jsx";
 import Subtitle from "@/Components/Card/Subtitle.jsx";
-export default function Card({title, subtitle}){
-
+export default function Card({title, subtitle, user}){
+console.log(user)
     return (
         <>
         <section
