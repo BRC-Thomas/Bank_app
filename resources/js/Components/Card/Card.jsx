@@ -1,8 +1,8 @@
 import Dot from './Dot.jsx'
 import Title from "./Title.jsx";
 import Subtitle from "@/Components/Card/Subtitle.jsx";
-export default function Card({title, subtitle, user}){
-console.log(user)
+export default function Card({title, subtitle, user, totalInvoices}){
+console.log(totalInvoices)
     return (
         <>
         <section
@@ -14,7 +14,7 @@ console.log(user)
             </div>
 
             <div>
-                <p className="text-2xl font-bold text-gray-900 tracking-tight">$240.94</p>
+                <p className="text-2xl font-bold text-gray-900 tracking-tight">${totalInvoices? totalInvoices : ('240.94')}</p>
             </div>
 
             <div className='flex justify-between items-center'>

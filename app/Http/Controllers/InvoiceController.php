@@ -13,7 +13,10 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-      return Inertia::render('Invoices/Index', []);
+        $user = auth()->user();
+        $invoices = Invoice::where('bank_account_id', $user->bankAccount->id)->get();
+        $totalInvoices = Invoice::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
+        return Inertia::render('Invoices/Index', ['invoices' => $invoices,'totalInvoices' => $totalInvoices]);
     }
 
     /**
@@ -21,7 +24,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Invoices/Create', []);
     }
 
     /**
@@ -29,7 +32,17 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $user = $request->user();
+
+       $data = $request->validate([
+            'amount' => ['required', 'numeric'],
+        ]);
+       $data['bank_account_id'] = $user->bankAccount->id;
+
+        Invoice::create($data);
+
+        return redirect()->route('invoice.index')->with('message','Invoice Created Successfully');
+
     }
 
     /**

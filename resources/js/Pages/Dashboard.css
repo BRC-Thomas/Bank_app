@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'kredit';
+    src: url('/public/fonts/kredit_front.otf') format('opentype');
+}
+
+.cardNumber{
+    font-family: kredit, serif;
+}

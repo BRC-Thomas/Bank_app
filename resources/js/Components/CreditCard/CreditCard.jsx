@@ -7,16 +7,16 @@ export default function CreditCard() {
                 className="relative w-90 h-50 m-auto rounded-xl text-white transition-transform transform hover:scale-105 z-10">
                 <img className="object-cover w-full h-full " src="/images/applePay.png" alt="card"/>
 
-                <div className="w-full px-8 absolute bottom-5">
+                <div className="w-full px-8 absolute bottom-5 text-xl">
                     <div className="pt-3 pr-6">
                         <div className="">
-                            <p className="font-medium text-md font-mono tracking-[-1px]">
+                            <p className="cardNumber font-medium font-mono tracking-[-1px]">
                                 03/25
                             </p>
                         </div>
                     </div>
                     <div>
-                        <p className="font-thin tracking-[-1.8px] font-mono">
+                        <p className="cardNumber font-thin tracking-[-1.5px]">
                             **** **** **** <strong>4642</strong>
                         </p>
                     </div>

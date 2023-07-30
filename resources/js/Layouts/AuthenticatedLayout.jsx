@@ -64,14 +64,12 @@ export default function Authenticated({ user, header, children }) {
 
                                 <NavLink
                                     href={route("invoice.index")}
-                                    active={route().current("invoice.index")}
+                                    active={route().current("invoice.index") || route().current("invoice.create")}
                                 >
                                     <TbFileInvoice
                                         className={"w-6 h-6 mb-2  mx-auto"}
                                         style={{
-                                            color: route().current(
-                                                "invoice.index"
-                                            )
+                                            color: route().current("invoice.index") || route().current("invoice.create")
                                                 ? "#4f46e5"
                                                 : "#cecece",
                                         }}
@@ -245,7 +243,7 @@ export default function Authenticated({ user, header, children }) {
                             Dashboard
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            href="#"
+                            /*href={route("/invoice/index")}*/
                             active={route().current("invoice")}
                         >
                             Invoice
