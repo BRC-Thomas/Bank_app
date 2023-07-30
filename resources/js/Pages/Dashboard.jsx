@@ -9,7 +9,7 @@ import './Dashboard.css'
 import ChartFullComponent from "@/Components/Chart/ChartFullComponent.jsx";
 import Invoice from "@/Components/Invoice/Invoice.jsx";
 
-export default function Dashboard({auth}) {
+export default function Dashboard({auth, totalInvoices, avgInvoices,}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -28,7 +28,7 @@ export default function Dashboard({auth}) {
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-5 md:col-span-3 log:col-start-3 lg:col-span-2">
-                            <Card title={'Invoice'} subtitle={'Average'} user={auth.user}/>
+                            <Card title={'Invoice'} subtitle={'Average'} user={auth.user} totalInvoices={totalInvoices} avgInvoices={avgInvoices}/>
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-8 md:col-span-3 log:col-start-5 lg:col-span-2">

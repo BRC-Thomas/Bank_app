@@ -11,6 +11,12 @@ class Invoice extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'amount',
+        'bank_account_id'
+    ];
+
+
     public function bankAccount(): BelongsTo
     {
         return $this->belongsTo(BankAccount::class);
