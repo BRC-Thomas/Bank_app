@@ -9,7 +9,7 @@ import './Dashboard.css'
 import ChartFullComponent from "@/Components/Chart/ChartFullComponent.jsx";
 import Invoice from "@/Components/Invoice/Invoice.jsx";
 
-export default function Dashboard({auth, totalInvoices, avgInvoices,}) {
+export default function Dashboard({auth, totalInvoices, avgInvoices, totalIncomes, saves}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -24,15 +24,21 @@ export default function Dashboard({auth, totalInvoices, avgInvoices,}) {
                         className="px-2 block sm:grid grid-cols-3 grid-rows-3 gap-2 sm:px-4 sm:grid-cols-12 md:grid-cols-11 md:grid-row-12 lg:grid-cols-9 lg:grid-rows-5 lg:gap-2 ">
 
                         <div className="sm:col-span-4 md:col-start-2 md:col-span-3 lg:col-start-1 lg:col-span-2 ">
-                            <Card title={'Total Revenue'} subtitle={'Close target'} user={auth.user}/>
+                            <a  href={route("income.index")}>
+                                <Card title={'Total Revenue'} subtitle={'Close target'} user={auth.user} totalIncomes={totalIncomes} type={'income'}/>
+                            </a>
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-5 md:col-span-3 log:col-start-3 lg:col-span-2">
-                            <Card title={'Invoice'} subtitle={'Average'} user={auth.user} totalInvoices={totalInvoices} avgInvoices={avgInvoices}/>
+                            <a href={route("invoice.index")}>
+                            <Card title={'Invoice'} subtitle={'Average'} user={auth.user} totalInvoices={totalInvoices} avgInvoices={avgInvoices} type={'invoice'}/>
+                            </a>
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-8 md:col-span-3 log:col-start-5 lg:col-span-2">
-                            <Card title={'Total Saves'} subtitle={'In Draft'}/>
+                            <a href="#">
+                            <Card title={'Total Saves'} subtitle={'In Draft'} saves={saves} type={'save'}/>
+                            </a>
                         </div>
 
 

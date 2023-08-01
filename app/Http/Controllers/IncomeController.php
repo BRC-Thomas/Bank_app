@@ -14,7 +14,10 @@ class IncomeController extends Controller
      */
     public function index()
     {
-      return Inertia::render('Incomes/Index',[]);
+        $user = auth()->user();
+        $incomes = Income::where('bank_account_id', $user->bankAccount->id)->get();
+        $totalIncomes = Income::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
+        return Inertia::render('Incomes/Index', ['incomes' => $incomes,'totalIncomes' => $totalIncomes]);
     }
 
     /**
@@ -22,7 +25,7 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Incomes/Create', []);
     }
 
     /**
@@ -30,7 +33,16 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        $data = $request->validate([
+            'amount' => ['required', 'numeric'],
+        ]);
+        $data['bank_account_id'] = $user->bankAccount->id;
+
+        Income::create($data);
+
+        return redirect()->route('income.index')->with('message','Income Added Successfully');
     }
 
     /**

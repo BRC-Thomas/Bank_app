@@ -58,7 +58,7 @@ export default function Index({auth, invoices, totalInvoices}) {
                             {invoices.map(invoice => (
                                 <tr className="odd:bg-gray-50">
                                     <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                        {invoice.amount}
+                                        {invoice.amount} $
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                         {format(new Date(invoice.created_at), 'MMMM d yyyy')}
