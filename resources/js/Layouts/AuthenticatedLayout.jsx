@@ -243,7 +243,7 @@ export default function Authenticated({ user, header, children }) {
                             Dashboard
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            /*href={route("/invoice/index")}*/
+                            /*href={route("invoice")}*/
                             active={route().current("invoice")}
                         >
                             Invoice
