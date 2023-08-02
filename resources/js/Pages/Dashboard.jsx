@@ -30,15 +30,15 @@ export default function Dashboard({auth, totalInvoices, avgInvoices, totalIncome
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-5 md:col-span-3 log:col-start-3 lg:col-span-2">
-                            <a href={route("invoice.index")}>
+                           {/* <a href={route("invoice.index")}>*/}
                             <Card title={'Invoice'} subtitle={'Average'} user={auth.user} totalInvoices={totalInvoices} avgInvoices={avgInvoices} type={'invoice'}/>
-                            </a>
+                            {/*</a>*/}
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-8 md:col-span-3 log:col-start-5 lg:col-span-2">
-                            <a href="#">
+                            {/*<a href="#">*/}
                             <Card title={'Total Saves'} subtitle={'In Draft'} saves={saves} type={'save'}/>
-                            </a>
+                            {/*</a>*/}
                         </div>
 
 
