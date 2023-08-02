@@ -9,7 +9,7 @@ export default function Card({title, subtitle, user, type,  totalInvoices, total
         >
             <div className='flex justify-between items-center'>
                 <Title title={title}/>
-                <Dot />
+                <Dot type={type} />
             </div>
 
             <div>
