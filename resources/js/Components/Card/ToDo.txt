@@ -1,5 +1,0 @@
-Card TODO :
-
-add bg square on hover
-
-OTHER CARDS (dot)POPUP DETAIL -> INDEX

@@ -1,15 +1,15 @@
 const PopUp = ({ type, show, setShow }) => {
     return (
         <aside
-            className={`absolute top-2 right-0 z-50 flex items-center justify-center gap-4 rounded-lg bg-indigo-600 p-2 text-white whitespace-nowrap tracking-normal ${show ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-500`}
+            className={`absolute top-2 right-0 z-50 flex items-center justify-center gap-4 rounded-lg bg-indigo-600 p-2 text-white whitespace-nowrap tracking-normal shadow-lg ${show ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-500`}
         >
             {type === 'invoice' ? (
-                <a href={route("income.index")} className="text-sm font-medium">
-                    Add +
+                <a href={route("invoice.index")} className="text-sm font-medium">
+                    Add invoice
                 </a>
             ) : type === 'income' ? (
-                <a href={route("invoice.index")} className="text-sm font-medium">
-                    Add +
+                <a href={route("income.index")} className="text-sm font-medium">
+                    Add income
                 </a>
             ) :
                 <a href='#'/*{route(`${type}.index`)}*/ className="text-sm font-medium">

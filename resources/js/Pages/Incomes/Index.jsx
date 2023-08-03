@@ -2,6 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {Head, Link, usePage} from "@inertiajs/react";
 import {format} from 'date-fns';
 import {useEffect, useState} from "react";
+import { FiEdit, FiTrash } from "react-icons/fi";
 
 export default function Index({auth, incomes, totalInvoices}) {
     const { flash } = usePage().props
@@ -35,7 +36,6 @@ export default function Index({auth, incomes, totalInvoices}) {
                               className='inline-block rounded border border-indigo-600 bg-indigo-600 px-10 py-2.5 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500'>Add +</Link>
                     </div>
 
-
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm rounded">
                             <thead className="text-left">
@@ -64,7 +64,13 @@ export default function Index({auth, incomes, totalInvoices}) {
                                         {format(new Date(income.created_at), 'MMMM d yyyy')}
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        {/*TO DO FORM ACTION*/}
+                                        <div className="flex ">
+                                            <Link href={`income/${income.id}/edit`}>
+                                                <FiEdit className={'mr-4 '}/>
+                                            </Link>
+                                            <FiTrash />
+                                        </div>
+
                                     </td>
                                 </tr>
                             ))}

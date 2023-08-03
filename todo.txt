@@ -1,0 +1,31 @@
+Card TODO :
+
+add bg square on hover
+
+OTHER CARDS (dot)POPUP DETAIL -> INDEX
+
+percentage avg month by month, compare to month -1 + rename to "last month"
+
+
+Analitics Report :
+Set real data from database
+
+
+Card :
+Total Balance: set real data, (AllIncomes - AllInvoices)
+
+
+
+Goals :
+set goals and set real data in card
+details goal + clickable
+modify on hover bg color
+
+
+Recent Invoice:
+Show real data (3last one + paginate)
+recipent ??
+
+
+Invoice / Income :
+Action btn, edit delete
