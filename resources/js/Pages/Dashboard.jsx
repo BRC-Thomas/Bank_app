@@ -24,21 +24,15 @@ export default function Dashboard({auth, totalInvoices, avgInvoices, totalIncome
                         className="px-2 block sm:grid grid-cols-3 grid-rows-3 gap-2 sm:px-4 sm:grid-cols-12 md:grid-cols-11 md:grid-row-12 lg:grid-cols-9 lg:grid-rows-5 lg:gap-2 ">
 
                         <div className="sm:col-span-4 md:col-start-2 md:col-span-3 lg:col-start-1 lg:col-span-2 ">
-                            <a  href={route("income.index")}>
-                                <Card title={'Total Revenue'} subtitle={'Close target'} user={auth.user} totalIncomes={totalIncomes} type={'income'}/>
-                            </a>
+                            <Card title={'Total Revenue'} subtitle={'Close target'} user={auth.user} totalIncomes={totalIncomes} type={'income'}/>
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-5 md:col-span-3 log:col-start-3 lg:col-span-2">
-                           {/* <a href={route("invoice.index")}>*/}
                             <Card title={'Invoice'} subtitle={'Average'} user={auth.user} totalInvoices={totalInvoices} avgInvoices={avgInvoices} type={'invoice'}/>
-                            {/*</a>*/}
                         </div>
                         <div
                             className="my-2 sm:my-0 sm:col-span-4 md:col-start-8 md:col-span-3 log:col-start-5 lg:col-span-2">
-                            {/*<a href="#">*/}
                             <Card title={'Total Saves'} subtitle={'In Draft'} saves={saves} type={'save'}/>
-                            {/*</a>*/}
                         </div>
 
 
@@ -46,12 +40,12 @@ export default function Dashboard({auth, totalInvoices, avgInvoices, totalIncome
                             className="hidden lg:block my-3 sm:my-0 col-span-full lg:row-span-full lg:col-start-7 ml-2">
                             <div
                                 className=" flex-col max-w-[80vw] mx-auto items-end justify-between rounded-lg border border-gray-100 bg-white px-4 py-2 relative sm:max-w-full">
-                                <div className={'px-4'}>
+                                <div className={'flex justify-between items-center align-baseline px-4'}>
                                     <Title title={'Your card'}/>
-                                    <Dot className={'absolute top-2 right-8'}/>
+                                    <Dot />
                                 </div>
                                 <CreditCard/>
-                                <CreditCardInfo/>
+                                <CreditCardInfo type={'other'}/>
                             </div>
                         </div>
 

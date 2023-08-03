@@ -4,7 +4,7 @@ import {HiDownload, HiUpload} from 'react-icons/hi'
 import Dot from "@/Components/Card/Dot.jsx";
 import CreditCardGoal from "@/Components/CreditCard/CreditCardGoal.jsx";
 
-export default function CreditCradInfo() {
+export default function CreditCardContent({type}) {
     return (
         <>
             {/*Header card info*/}
@@ -35,7 +35,7 @@ export default function CreditCradInfo() {
                 <div className='m-2'>
                     <div className="flex justify-between items-baseline">
                         <Title title='Total Goals'/>
-                        <Dot/>
+                        <Dot type={type}/>
                     </div>
                     <div className='justify-between [&>*:nth-child(even)]:bg-slate-100/80'>
                         <CreditCardGoal title={'StartUp Plan'} date={'Thu 26 Jan'} stats={[6,3,1,8,1]}/>
