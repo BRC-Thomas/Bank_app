@@ -1,18 +1,23 @@
-const PopUp = ({type, show, setShow}) =>  {
+const PopUp = ({ type, show, setShow }) => {
     return (
         <aside
-            onClick={() => setShow(false)}
-            className={`absolute top-4 right-3 end-4 z-50 flex items-center justify-center gap-4 rounded-lg bg-indigo-600/90 p-2 text-white ${show ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-500`}
+            className={`absolute top-2 right-0 z-50 flex items-center justify-center gap-4 rounded-lg bg-indigo-600 p-2 text-white whitespace-nowrap tracking-normal shadow-lg ${show ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-500`}
         >
-            <a
-                href={type === 'invoice' ? `${route("income.index")}` : `${route("invoice.index")}`}
-                rel="noreferrer"
-                className="text-sm font-medium"
-            >
-                Add +
-            </a>
+            {type === 'invoice' ? (
+                <a href={route("invoice.index")} className="text-sm font-medium">
+                    Add invoice
+                </a>
+            ) : type === 'income' ? (
+                <a href={route("income.index")} className="text-sm font-medium">
+                    Add income
+                </a>
+            ) :
+                <a href='#'/*{route(`${type}.index`)}*/ className="text-sm font-medium">
+                    Show +
+                </a>
+            }
 
-            <button className="rounded bg-white/20 p-1 hover:bg-white/10">
+            <button onClick={() => setShow(false)} className="rounded bg-white/20 p-1 hover:bg-white/10">
                 <span className="sr-only">Close</span>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -28,10 +33,7 @@ const PopUp = ({type, show, setShow}) =>  {
                 </svg>
             </button>
         </aside>
-    )
-}
+    );
+};
 
 export default PopUp;
-
-
-/*TO DO OTHER CARDS POPUP DETAIL -> INDEX */

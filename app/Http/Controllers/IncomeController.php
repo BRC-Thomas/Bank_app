@@ -33,7 +33,7 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->user();
+        $user = auth()->user();
 
         $data = $request->validate([
             'amount' => ['required', 'numeric'],
@@ -58,7 +58,7 @@ class IncomeController extends Controller
      */
     public function edit(Income $income)
     {
-        //
+        return Inertia::render('Incomes/Edit', ['income' => $income]);
     }
 
     /**

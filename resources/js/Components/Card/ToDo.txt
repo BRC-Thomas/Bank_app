@@ -1,3 +1,0 @@
-Card TODO :
-
-add bg square on hover
