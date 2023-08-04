@@ -1,7 +1,8 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import {Head, Link, usePage} from "@inertiajs/react";
+import {Head, Link, router, usePage} from "@inertiajs/react";
 import {format} from 'date-fns';
 import {useEffect, useState} from "react";
+import {FiEdit, FiTrash} from "react-icons/fi";
 
 export default function Index({auth, invoices, totalInvoices}) {
     const { flash } = usePage().props
@@ -18,6 +19,14 @@ export default function Index({auth, invoices, totalInvoices}) {
             setTimeout(hideFlash, 3000);
         }
     },[flash.message])
+
+    function handleEdit(id) {
+        router.visit(`invoice/${id}/edit`)
+    }
+
+    function handleDelete(id) {
+        router.delete(`invoice/${id}`)
+    }
 
 
     return (
@@ -64,7 +73,18 @@ export default function Index({auth, invoices, totalInvoices}) {
                                         {format(new Date(invoice.created_at), 'MMMM d yyyy')}
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        {/*TO DO FORM ACTION*/}
+                                        <div className="flex gap-2">
+                                            <span
+                                                onClick={() => handleEdit(invoice.id)}
+                                                className={"cursor-pointer"}>
+                                                <FiEdit className={'mr-4 '}/>
+                                            </span>
+                                            <span
+                                                onClick={() => handleDelete(invoice.id)}
+                                                className={"cursor-pointer"}>
+                                                <FiTrash/>
+                                            </span>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -86,7 +106,7 @@ export default function Index({auth, invoices, totalInvoices}) {
                                                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                         </svg>
                                         <span className="sr-only">Info</span>
-                                        <h2 className="text-lg font-medium">Invoice created successfully.</h2>
+                                        <h2 className="text-lg font-medium">{flash.message}</h2>
                                     </div>
                                 </div>
                             </div>

@@ -58,7 +58,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        //
+        return Inertia::render('Invoices/Edit', ['invoice' => $invoice]);
     }
 
     /**
@@ -66,7 +66,13 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        $data = $request->validate([
+            'amount' => ['required', 'numeric'],
+        ]);
+
+        $invoice->update($data);
+
+        return redirect()->route('invoice.index')->with('message', 'Invoice updated successfully');
     }
 
     /**
@@ -74,6 +80,9 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+        $invoice->delete();
+
+        return redirect()->route('invoice.index')->with('message', 'Invoice deleted successfully');
+
     }
 }

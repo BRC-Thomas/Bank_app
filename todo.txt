@@ -13,7 +13,7 @@ Set real data from database
 
 Card :
 Total Balance: set real data, (AllIncomes - AllInvoices)
-
+format xxx xxx,xx
 
 
 Goals :
@@ -29,3 +29,11 @@ recipent ??
 
 Invoice / Income :
 Action btn, edit delete
+
+Saves:
+monthly saves
+
+
+
+FIX :
+msg flah

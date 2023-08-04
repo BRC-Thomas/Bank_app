@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import {Head, Link, usePage} from "@inertiajs/react";
+import { Head, Link, usePage, router  } from "@inertiajs/react";
 import {format} from 'date-fns';
 import {useEffect, useState} from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
@@ -21,6 +21,15 @@ export default function Index({auth, incomes, totalInvoices}) {
     },[flash.message])
 
 
+    function handleEdit(id) {
+        router.visit(`income/${id}/edit`)
+    }
+
+    function handleDelete(id) {
+        router.delete(`income/${id}`)
+    }
+
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -32,7 +41,7 @@ export default function Index({auth, incomes, totalInvoices}) {
             <div className="py-6 sm:py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className='flex justify-end mb-2'>
-                        <Link href="/income/create"
+                        <Link href="/invoice/create"
                               className='inline-block rounded border border-indigo-600 bg-indigo-600 px-10 py-2.5 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500'>Add +</Link>
                     </div>
 
@@ -54,7 +63,6 @@ export default function Index({auth, incomes, totalInvoices}) {
 
                             <tbody className="divide-y divide-gray-200">
 
-
                             {incomes.map(income => (
                                 <tr className="odd:bg-gray-50">
                                     <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -63,14 +71,19 @@ export default function Index({auth, incomes, totalInvoices}) {
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                         {format(new Date(income.created_at), 'MMMM d yyyy')}
                                     </td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        <div className="flex ">
-                                            <Link href={`income/${income.id}/edit`}>
+                                    <td className="whitespace-nowrap px-4 py-2  text-gray-700">
+                                        <div className="flex gap-2">
+                                            <span
+                                                onClick={() => handleEdit(income.id)}
+                                                className={"cursor-pointer"}>
                                                 <FiEdit className={'mr-4 '}/>
-                                            </Link>
-                                            <FiTrash />
+                                            </span>
+                                            <span
+                                                onClick={() => handleDelete(income.id)}
+                                                className={"cursor-pointer"}>
+                                                <FiTrash/>
+                                            </span>
                                         </div>
-
                                     </td>
                                 </tr>
                             ))}
@@ -92,7 +105,7 @@ export default function Index({auth, incomes, totalInvoices}) {
                                                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                         </svg>
                                         <span className="sr-only">Info</span>
-                                        <h2 className="text-lg font-medium">income created successfully.</h2>
+                                        <h2 className="text-lg font-medium">{flash.message}</h2>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 import Dot from './Dot.jsx'
 import Title from "./Title.jsx";
 import Subtitle from "@/Components/Card/Subtitle.jsx";
+import { Link } from '@inertiajs/react'
 export default function Card({title, subtitle, user, type,  totalInvoices, totalIncomes, saves}){
     return (
         <>
@@ -13,9 +14,11 @@ export default function Card({title, subtitle, user, type,  totalInvoices, total
             </div>
 
             <div>
-                <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                    {type === 'save' ? `${saves.toFixed(2)} $` : (type === 'invoice' ? `${totalInvoices.toFixed(2)}` : totalIncomes.toFixed(2))}
-                </p>
+                <Link href={`${type}`}>
+                    <p className="text-2xl font-bold text-gray-900 tracking-tight">
+                        {type === 'save' ? `${saves.toFixed(2)} $` : (type === 'invoice' ? `${totalInvoices.toFixed(2)}` : totalIncomes.toFixed(2))}
+                    </p>
+                </Link>
             </div>
 
             <div className='flex justify-between items-center'>

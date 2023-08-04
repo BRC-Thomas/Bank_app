@@ -1,6 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {Head, usePage} from "@inertiajs/react";
-import { useState } from 'react'
 import { useForm } from '@inertiajs/react'
 
 
@@ -24,7 +23,6 @@ export default function Index({ auth }) {
 
         >
             <Head title="Dashboard" />
-
 
             <div className="py-6 sm:py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

@@ -42,7 +42,7 @@ class IncomeController extends Controller
 
         Income::create($data);
 
-        return redirect()->route('income.index')->with('message','Income Added Successfully');
+        return redirect()->route('income.index')->with('message','Income added successfully');
     }
 
     /**
@@ -66,7 +66,13 @@ class IncomeController extends Controller
      */
     public function update(Request $request, Income $income)
     {
-        //
+        $data = $request->validate([
+            'amount' => ['required', 'numeric'],
+        ]);
+
+        $income->update($data);
+
+        return redirect()->route('income.index')->with('message', 'Income updated successfully');
     }
 
     /**
@@ -74,6 +80,9 @@ class IncomeController extends Controller
      */
     public function destroy(Income $income)
     {
-        //
+        $income->delete();
+
+        return redirect()->route('income.index')->with('message', 'Income deleted successfully');
+
     }
 }

@@ -1,20 +1,42 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import {Head, usePage} from "@inertiajs/react";
-import { useState } from 'react'
+import {Head, router, usePage} from "@inertiajs/react";
 import { useForm } from '@inertiajs/react'
+import {useState, useEffect} from "react";
 
 
-export default function Create({ auth }) {
+export default function Edit({ auth, invoice }) {
+    const { flash } = usePage().props
+    const [showFlash, setShowFlash] = useState(false);
 
-    const { data, setData, post, processing, errors } = useForm({
-        amount: "",
-        category_id: "",
-        bank_account_id: "",
+    const { data, setData, put, processing, errors } = useForm({
+        amount: invoice.amount,
     })
 
     function submit(e) {
         e.preventDefault()
-        post('/invoice/')
+        put(route('invoice.update', { invoice: invoice.id }), data)
+    }
+
+
+    const hideFlash = () => {
+        setShowFlash(false);
+    }
+
+    useEffect(() => {
+        if(flash.message){
+            setShowFlash(true);
+
+            setTimeout(hideFlash, 3000);
+        }
+    },[flash.message])
+
+
+    function handleEdit(id) {
+        router.visit(`invoice/${id}/edit`)
+    }
+
+    function handleDelete(id) {
+        router.delete(`invoice/${id}`)
     }
 
 
@@ -24,7 +46,6 @@ export default function Create({ auth }) {
 
         >
             <Head title="Dashboard" />
-
 
             <div className="py-6 sm:py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
