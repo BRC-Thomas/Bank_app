@@ -25,7 +25,7 @@ export default function Card({title, subtitle, user, type,  totalInvoices, total
                 <p><Subtitle  subtitle={subtitle} /></p>
 
                 <div className='flex bg-emerald-100/75 p-1 rounded'>
-                    <span className="text-xs text-green-600 font-medium"> 67%  </span>
+                    <span className="text-xs text-green-600 font-medium"> 0%  </span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-4 w-4 ml-0.5"

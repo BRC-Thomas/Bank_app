@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import SecondaryButton from "@/Components/SecondaryButton.jsx";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -92,6 +93,11 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
+            <div className="flex justify-center text-xs text-gray-600 mt-2">
+                <Link href={route('register')}>
+                    You don't have an account ? Register there
+                </Link>
+            </div>
         </GuestLayout>
     );
 }

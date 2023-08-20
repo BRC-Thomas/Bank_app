@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Income;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,7 +16,9 @@ class IncomeController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $incomes = Income::where('bank_account_id', $user->bankAccount->id)->get();
+        $incomes = Income::with('category')
+            ->where('bank_account_id', $user->bankAccount->id)
+            ->get();
         $totalIncomes = Income::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
         return Inertia::render('Incomes/Index', ['incomes' => $incomes,'totalIncomes' => $totalIncomes]);
     }
@@ -25,7 +28,8 @@ class IncomeController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Incomes/Create', []);
+        $categories = Category::where('type', 'income')->get();
+        return Inertia::render('Incomes/Create', ['categories' => $categories]);
     }
 
     /**
@@ -37,7 +41,16 @@ class IncomeController extends Controller
 
         $data = $request->validate([
             'amount' => ['required', 'numeric'],
+            'category_id' => ['nullable', 'exists:categories,id'],
         ]);
+
+        if (empty($data['category_id'])) {
+            $otherCategory = Category::where('type', 'income')->where('title', 'other')->first();
+            if ($otherCategory) {
+                $data['category_id'] = $otherCategory->id;
+            }
+        }
+
         $data['bank_account_id'] = $user->bankAccount->id;
 
         Income::create($data);
@@ -58,7 +71,8 @@ class IncomeController extends Controller
      */
     public function edit(Income $income)
     {
-        return Inertia::render('Incomes/Edit', ['income' => $income]);
+        $categories = Category::where('type', 'income')->get();
+        return Inertia::render('Incomes/Edit', ['income' => $income, 'categories' => $categories]);
     }
 
     /**
@@ -68,6 +82,7 @@ class IncomeController extends Controller
     {
         $data = $request->validate([
             'amount' => ['required', 'numeric'],
+            'category_id' => ['nullable', 'exists:categories,id'],
         ]);
 
         $income->update($data);

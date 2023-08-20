@@ -5,9 +5,9 @@ import {useEffect, useState} from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 
 export default function Index({auth, incomes, totalInvoices}) {
+    console.log(incomes)
     const { flash } = usePage().props
     const [showFlash, setShowFlash] = useState(false);
-
     const hideFlash = () => {
         setShowFlash(false);
     }
@@ -56,6 +56,9 @@ export default function Index({auth, incomes, totalInvoices}) {
                                     Date
                                 </th>
                                 <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                    Category
+                                </th>
+                                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                     Action
                                 </th>
                             </tr>
@@ -70,6 +73,9 @@ export default function Index({auth, incomes, totalInvoices}) {
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">
                                         {format(new Date(income.created_at), 'MMMM d yyyy')}
+                                    </td>
+                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                                        {income.category.title}
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2  text-gray-700">
                                         <div className="flex gap-2">

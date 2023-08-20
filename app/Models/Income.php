@@ -13,7 +13,8 @@ class Income extends Model
 
     protected $fillable = [
         'amount',
-        'bank_account_id'
+        'bank_account_id',
+        'category_id',
     ];
 
     public function bankAccount(): BelongsTo

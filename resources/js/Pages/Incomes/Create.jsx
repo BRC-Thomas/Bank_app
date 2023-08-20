@@ -3,7 +3,7 @@ import {Head, usePage} from "@inertiajs/react";
 import {useForm} from '@inertiajs/react'
 
 
-export default function Index({auth}) {
+export default function Index({auth, categories}) {
 
     const {data, setData, post, processing, errors} = useForm({
         amount: "",
@@ -47,11 +47,20 @@ export default function Index({auth}) {
                                 Category
                             </label>
                             <select
-                                
+                                name="category_id"
+                                value={data.category_id}
                                 onChange={e => setData('category_id', e.target.value)}
                                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
-                            />
-                            {errors.category_id && <div>{errors.category_id}</div>}
+                            >
+                                <option value="">Select a category</option>
+                                {categories.map(category => (
+                                    <option key={category.id} value={category.id}>
+                                        {category.title}
+                                    </option>
+                                ))}
+                            </select>
+                            {errors.category_id &&
+                                <div className="absolute top-14.5 left-0 text-red-500">{errors.category_id}</div>}
                         </div>
                         <button
                             type="submit"
