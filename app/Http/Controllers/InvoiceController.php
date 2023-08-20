@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
 class InvoiceController extends Controller
@@ -14,7 +16,9 @@ class InvoiceController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $invoices = Invoice::where('bank_account_id', $user->bankAccount->id)->get();
+        $invoices = Invoice::with('category')
+            ->where('bank_account_id', $user->bankAccount->id)
+            ->get();
         $totalInvoices = Invoice::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
         return Inertia::render('Invoices/Index', ['invoices' => $invoices,'totalInvoices' => $totalInvoices]);
     }
@@ -24,7 +28,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Invoices/Create', []);
+        $categories = Category::where('type', 'invoice')->get();
+        return Inertia::render('Invoices/Create', ['categories' => $categories]);
     }
 
     /**
@@ -36,9 +41,19 @@ class InvoiceController extends Controller
 
        $data = $request->validate([
             'amount' => ['required', 'numeric'],
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'created_at' => ['required']
         ]);
-       $data['bank_account_id'] = $user->bankAccount->id;
-     $data->created_at = $request['created_at'];
+
+        if (empty($data['category_id'])) {
+            $otherCategory = Category::where('type', 'invoice')->where('title', 'other')->first();
+            if ($otherCategory) {
+                $data['category_id'] = $otherCategory->id;
+            }
+        }
+
+        $data['bank_account_id'] = $user->bankAccount->id;
+        $data['created_at'] = Carbon::parse($data['created_at']);
         Invoice::create($data);
 
         return redirect()->route('invoice.index')->with('message','Invoice Created Successfully');
@@ -58,7 +73,8 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        return Inertia::render('Invoices/Edit', ['invoice' => $invoice]);
+        $categories = Category::where('type', 'invoice')->get();
+        return Inertia::render('Invoices/Edit', ['invoice' => $invoice,'categories' => $categories]);
     }
 
     /**
