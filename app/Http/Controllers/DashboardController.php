@@ -14,13 +14,16 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $totalInvoices = Invoice::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
-        $avgInvoices = $totalInvoices / Invoice::where('bank_account_id', $user->bankAccount->id)->get()->count();
-        /* compare avg to avg month -1*/
-        $incomes = Income::where('bank_account_id', $user->bankAccount->id)->get();
-        $totalIncomes = Income::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
+        $bankAccountId = $user->bankAccount->id;
+
+        $invoicesCount = Invoice::where('bank_account_id', $bankAccountId)->count();
+        $totalInvoices = Invoice::where('bank_account_id', $bankAccountId)->sum('amount');
+        $avgInvoices = $invoicesCount > 0 ? $totalInvoices / $invoicesCount : 0;
+
+        $totalIncomes = Income::where('bank_account_id', $bankAccountId)->sum('amount');
 
         $saves = $totalIncomes - $totalInvoices; /*all time, monthly save to do*/
+        $totalInvoices; /*all time, monthly save to do*/
 
         return Inertia::render('Dashboard',[
             'totalInvoices' => $totalInvoices,
