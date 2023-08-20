@@ -1,7 +1,5 @@
 Card TODO :
 
-add bg square on hover
-
 OTHER CARDS (dot)POPUP DETAIL -> INDEX
 
 percentage avg month by month, compare to month -1 + rename to "last month"
@@ -12,7 +10,6 @@ Set real data from database
 
 
 Card :
-Total Balance: set real data, (AllIncomes - AllInvoices)
 format xxx xxx,xx
 
 

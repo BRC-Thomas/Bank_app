@@ -38,7 +38,7 @@ class InvoiceController extends Controller
             'amount' => ['required', 'numeric'],
         ]);
        $data['bank_account_id'] = $user->bankAccount->id;
-
+     $data->created_at = $request['created_at'];
         Invoice::create($data);
 
         return redirect()->route('invoice.index')->with('message','Invoice Created Successfully');
@@ -68,6 +68,7 @@ class InvoiceController extends Controller
     {
         $data = $request->validate([
             'amount' => ['required', 'numeric'],
+            'created_at' => ['required']
         ]);
 
         $invoice->update($data);

@@ -41,7 +41,7 @@ export default function Index({auth, incomes, totalInvoices}) {
             <div className="py-6 sm:py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className='flex justify-end mb-2'>
-                        <Link href="/invoice/create"
+                        <Link href="/income/create"
                               className='inline-block rounded border border-indigo-600 bg-indigo-600 px-10 py-2.5 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500'>Add +</Link>
                     </div>
 

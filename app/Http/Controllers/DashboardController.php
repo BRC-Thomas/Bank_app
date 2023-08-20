@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $incomes = Income::where('bank_account_id', $user->bankAccount->id)->get();
         $totalIncomes = Income::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
 
-        $saves = $totalIncomes - $totalInvoices;
+        $saves = $totalIncomes - $totalInvoices; /*all time, monthly save to do*/
 
         return Inertia::render('Dashboard',[
             'totalInvoices' => $totalInvoices,

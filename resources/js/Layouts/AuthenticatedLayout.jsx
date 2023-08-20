@@ -78,13 +78,13 @@ export default function Authenticated({ user, header, children }) {
                                 </NavLink>
 
                                 <NavLink
-                                    href="#"
-                                    active={route().current("wallet")}
+                                    href={route("income.index")}
+                                    active={route().current("income.index")}
                                 >
                                     <FaWallet
                                         className={"w-5 h-6 mb-2 mx-auto"}
                                         style={{
-                                            color: route().current("wallet")
+                                            color: route().current("income.index") || route().current("income.create")
                                                 ? "#4f46e5"
                                                 : "#cecece",
                                         }}
@@ -249,8 +249,8 @@ export default function Authenticated({ user, header, children }) {
                             Invoice
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            href="#"
-                            active={route().current("Wallet")}
+                            href={route("income.index")}
+                            active={route().current("income.index")}
                         >
                             Wallet
                         </ResponsiveNavLink>

@@ -1,20 +1,22 @@
+import {Link} from "@inertiajs/react";
+
 const PopUp = ({ type, show, setShow }) => {
     return (
         <aside
             className={`absolute top-2 right-0 z-50 flex items-center justify-center gap-4 rounded-lg bg-indigo-600 p-2 text-white whitespace-nowrap tracking-normal shadow-lg ${show ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-500`}
         >
             {type === 'invoice' ? (
-                <a href={route("invoice.create")} className="text-sm font-medium">
+                <Link href={route("invoice.create")} className="text-sm font-medium">
                     Add invoice
-                </a>
+                </Link>
             ) : type === 'income' ? (
-                <a href={route("income.create")} className="text-sm font-medium">
+                <Link href={route("income.create")} className="text-sm font-medium">
                     Add income
-                </a>
+                </Link>
             ) :
-                <a href='#'/*{route(`${type}.index`)}*/ className="text-sm font-medium">
+                <Link href='#'/*{route(`${type}.index`)}*/ className="text-sm font-medium">
                     Show +
-                </a>
+                </Link>
             }
 
             <button onClick={() => setShow(false)} className="rounded bg-white/20 p-1 hover:bg-white/10">

@@ -2,7 +2,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {Head, usePage} from "@inertiajs/react";
 import { useState } from 'react'
 import { useForm } from '@inertiajs/react'
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Create({ auth }) {
 
@@ -10,14 +11,14 @@ export default function Create({ auth }) {
         amount: "",
         category_id: "",
         bank_account_id: "",
+        created_at : Date.now()
     })
 
     function submit(e) {
         e.preventDefault()
         post('/invoice/')
     }
-
-
+    const [startDate, setStartDate] = useState(data.created_at);
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -32,9 +33,13 @@ export default function Create({ auth }) {
                         <label htmlFor="amount">amount</label>
                         <input type="text" value={data.amount} onChange={e => setData('amount', e.target.value)} />
                         {errors.amount && <div>{errors.amount}</div>}
-                        {/*<label htmlFor="category_id">category_id</label>
-                        <input type="text" value={data.category_id} onChange={e => setData('category_id', e.target.value)} />
-                        {errors.category_id && <div>{errors.category_id}</div>}*/}
+
+                        <DatePicker selected={startDate} onChange={date => {
+                            setStartDate(date);
+                            setData('created_at', date); // Update created_at in the form data
+                        }} />
+                        {errors.created_at && <div>{errors.created_at}</div>}
+
                         <button type="submit" disabled={processing}>submit</button>
                     </form>
                 </div>

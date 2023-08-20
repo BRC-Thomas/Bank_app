@@ -13,7 +13,8 @@ class Invoice extends Model
 
     protected $fillable = [
         'amount',
-        'bank_account_id'
+        'bank_account_id',
+        'date'
     ];
 
 
