@@ -94,12 +94,13 @@ export default function Edit({ auth, invoice, categories }) {
                                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                                 selected={startDate}
                                 onChange={date => {
-                                    setData('created_at', date); // Mise à jour de la date dans le state 'data'
-                                    setStartDate(date); // Mettre à jour le state 'startDate' si nécessaire
+                                    setData('created_at', date);
+                                    setStartDate(date);
                                 }}
                             />
                             {errors.created_at &&
-                                <div className="absolute top-14.5 left-0 text-red-500">{errors.created_at}</div>}
+                                <div className="absolute top-14.5 left-0 text-red-500">{errors.created_at}</div>
+                            }
                             <button
                                 type="submit"
                                 className="inline-block rounded bg-indigo-600 px-8 py-3 mt-6 ml-4 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"

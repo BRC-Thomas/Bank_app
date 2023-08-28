@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Income;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
 
@@ -42,6 +43,7 @@ class IncomeController extends Controller
         $data = $request->validate([
             'amount' => ['required', 'numeric'],
             'category_id' => ['nullable', 'exists:categories,id'],
+            'created_at' => ['required']
         ]);
 
         if (empty($data['category_id'])) {
@@ -52,6 +54,7 @@ class IncomeController extends Controller
         }
 
         $data['bank_account_id'] = $user->bankAccount->id;
+        $data['created_at'] = Carbon::parse($data['created_at']);
 
         Income::create($data);
 
@@ -83,6 +86,7 @@ class IncomeController extends Controller
         $data = $request->validate([
             'amount' => ['required', 'numeric'],
             'category_id' => ['nullable', 'exists:categories,id'],
+            'created_at' => ['required']
         ]);
 
         $income->update($data);

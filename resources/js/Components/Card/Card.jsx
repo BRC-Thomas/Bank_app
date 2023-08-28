@@ -16,7 +16,7 @@ export default function Card({title, subtitle, user, type,  totalInvoices, total
             <div>
                 <Link href={`${type}`}>
                     <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                        {type === 'save' ? `${saves.toFixed(2)} $` : (type === 'invoice' ? `${totalInvoices.toFixed(2)}` : totalIncomes.toFixed(2))}
+                        {type === 'save' ? `${saves.toFixed(2)}` : (type === 'invoice' ? `${totalInvoices.toFixed(2)}` : totalIncomes.toFixed(2))} $
                     </p>
                 </Link>
             </div>

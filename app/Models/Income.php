@@ -14,6 +14,8 @@ class Income extends Model
     protected $fillable = [
         'amount',
         'bank_account_id',
+        'date',
+        'created_at',
         'category_id',
     ];
 

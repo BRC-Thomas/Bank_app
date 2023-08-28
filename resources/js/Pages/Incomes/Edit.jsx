@@ -1,13 +1,20 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import {Head} from "@inertiajs/react";
 import { useForm } from '@inertiajs/react'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {useState} from "react";
 
 
 export default function Edit({ auth, income, categories }) {
 
+    const initialDate = new Date(income.created_at);
+    const [startDate, setStartDate] = useState(initialDate);
+
     const { data, setData, put, processing, errors } = useForm({
         amount: income.amount,
-        category_id: income.category_id
+        category_id: income.category_id,
+        created_at : new Date()
     })
 
     function submit(e) {
@@ -54,6 +61,19 @@ export default function Edit({ auth, income, categories }) {
                                     </option>
                                 ))}
                             </select>
+                        </div>
+                        <div className="flex justify-between mt-4">
+                            <DatePicker
+                                className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+                                selected={startDate}
+                                onChange={date => {
+                                    setData('created_at', date);
+                                    setStartDate(date);
+                                }}
+                            />
+                            {errors.created_at &&
+                                <div className="absolute top-14.5 left-0 text-red-500">{errors.created_at}</div>
+                            }
                         </div>
                         <button type="submit" className="inline-block rounded bg-indigo-600 px-8 py-3 mt-6 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
                         >Edit</button>
