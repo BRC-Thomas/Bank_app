@@ -64,12 +64,12 @@ export default function Authenticated({ user, header, children }) {
 
                                 <NavLink
                                     href={route("invoice.index")}
-                                    active={route().current("invoice.index") || route().current("invoice.create")}
+                                    active={route().current("invoice.*")}
                                 >
                                     <TbFileInvoice
                                         className={"w-6 h-6 mb-2  mx-auto"}
                                         style={{
-                                            color: route().current("invoice.index") || route().current("invoice.create")
+                                            color: route().current("invoice.*")
                                                 ? "#4f46e5"
                                                 : "#cecece",
                                         }}
@@ -79,12 +79,12 @@ export default function Authenticated({ user, header, children }) {
 
                                 <NavLink
                                     href={route("income.index")}
-                                    active={route().current("income.index")}
+                                    active={route().current("income.*")}
                                 >
                                     <FaWallet
                                         className={"w-5 h-6 mb-2 mx-auto"}
                                         style={{
-                                            color: route().current("income.index") || route().current("income.create")
+                                            color: route().current("income.*")
                                                 ? "#4f46e5"
                                                 : "#cecece",
                                         }}
@@ -109,13 +109,13 @@ export default function Authenticated({ user, header, children }) {
 
                                 <NavLink
                                     href="#"
-                                    active={route().current("Analytics")}
+                                    active={route().current("analytics")}
                                     className={"hidden md:block  "}
                                 >
                                     <IoAnalytics
                                         className={"w-6 h-6 mb-2 mx-auto"}
                                         style={{
-                                            color: route().current("Analytics")
+                                            color: route().current("analytics")
                                                 ? "#4f46e5"
                                                 : "#cecece",
                                         }}
@@ -125,13 +125,13 @@ export default function Authenticated({ user, header, children }) {
 
                                 <NavLink
                                     href="#"
-                                    active={route().current("Settings")}
+                                    active={route().current("settings")}
                                     className={"hidden lg:block"}
                                 >
                                     <BsGearFill
                                         className={"w-6 h-6 mb-2 mx-auto"}
                                         style={{
-                                            color: route().current("Settings")
+                                            color: route().current("settings")
                                                 ? "#4f46e5"
                                                 : "#cecece",
                                         }}
@@ -243,14 +243,14 @@ export default function Authenticated({ user, header, children }) {
                             Dashboard
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
-                            /*href={route("invoice")}*/
-                            active={route().current("invoice")}
+                            href={route("invoice.index")}
+                            active={route().current("invoice.*")}
                         >
                             Invoice
                         </ResponsiveNavLink>
                         <ResponsiveNavLink
                             href={route("income.index")}
-                            active={route().current("income.index")}
+                            active={route().current("income.*")}
                         >
                             Wallet
                         </ResponsiveNavLink>
@@ -269,7 +269,7 @@ export default function Authenticated({ user, header, children }) {
 
                         <ResponsiveNavLink
                             href="#"
-                            active={route().current("analytics")}
+                            active={route().current("settings")}
                         >
                             Settings
                         </ResponsiveNavLink>
