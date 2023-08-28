@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Create({ auth, categories }) {
-
+    const [startDate, setStartDate] = useState(new Date());
     const { data, setData, post, processing, errors } = useForm({
         amount: "",
         category_id: "",
@@ -18,7 +18,6 @@ export default function Create({ auth, categories }) {
         e.preventDefault()
         post('/invoice/')
     }
-    const [startDate, setStartDate] = useState(new Date());
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -67,12 +66,13 @@ export default function Create({ auth, categories }) {
                                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                                 selected={startDate}
                                 onChange={date => {
-                                    setData('created_at', date); // Mise à jour de la date dans le state 'data'
-                                    setStartDate(date); // Mettre à jour le state 'startDate' si nécessaire
+                                    setData('created_at', date);
+                                    setStartDate(date);
                                 }}
                             />
                             {errors.created_at &&
-                                <div className="absolute top-14.5 left-0 text-red-500">{errors.created_at}</div>}
+                                <div className="absolute top-14.5 left-0 text-red-500">{errors.created_at}</div>
+                            }
                             <button
                                 type="submit"
                                 className="inline-block rounded bg-indigo-600 px-8 py-3 mt-6 ml-4 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
