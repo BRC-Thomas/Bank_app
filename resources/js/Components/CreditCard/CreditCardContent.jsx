@@ -4,7 +4,7 @@ import {HiDownload, HiUpload} from 'react-icons/hi'
 import Dot from "@/Components/Card/Dot.jsx";
 import CreditCardGoal from "@/Components/CreditCard/CreditCardGoal.jsx";
 
-export default function CreditCardContent({type, saves}) {
+export default function CreditCardContent({type, totalBalance}) {
     return (
         <>
             {/*Header card info*/}
@@ -12,7 +12,7 @@ export default function CreditCardContent({type, saves}) {
                 <div className='flex justify-between'>
                     <div>
                         <Title title='Total Balance'/>
-                        <p className='flex items-baseline text-2xl font-bold'>${saves} <Subtitle subtitle='USD' className='ml-1 font-medium'/>
+                        <p className='flex items-baseline text-2xl font-bold'>${totalBalance} <Subtitle subtitle='USD' className='ml-1 font-medium'/>
                         </p>
                     </div>
                     <div className='flex justify-between w-1/2 gap-2'>

@@ -19,6 +19,7 @@ class IncomeController extends Controller
         $user = auth()->user();
         $incomes = Income::with('category')
             ->where('bank_account_id', $user->bankAccount->id)
+            ->orderBy('created_at', 'desc')
             ->get();
         $totalIncomes = Income::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
         return Inertia::render('Incomes/Index', ['incomes' => $incomes,'totalIncomes' => $totalIncomes]);

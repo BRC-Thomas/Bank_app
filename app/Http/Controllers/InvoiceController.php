@@ -18,6 +18,7 @@ class InvoiceController extends Controller
         $user = auth()->user();
         $invoices = Invoice::with('category')
             ->where('bank_account_id', $user->bankAccount->id)
+            ->orderBy('created_at', 'desc')
             ->get();
         $totalInvoices = Invoice::where('bank_account_id', $user->bankAccount->id)->get()->sum('amount');
         return Inertia::render('Invoices/Index', ['invoices' => $invoices,'totalInvoices' => $totalInvoices]);

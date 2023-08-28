@@ -6,6 +6,7 @@ use App\Models\BankAccount;
 use App\Models\Income;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
@@ -18,18 +19,26 @@ class DashboardController extends Controller
 
         $invoicesCount = Invoice::where('bank_account_id', $bankAccountId)->count();
         $totalInvoices = Invoice::where('bank_account_id', $bankAccountId)->sum('amount');
+        $totalIncome = Income::where('bank_account_id', $bankAccountId)->sum('amount');
         $avgInvoices = $invoicesCount > 0 ? $totalInvoices / $invoicesCount : 0;
 
+        $totalBalance = $totalIncome - $totalInvoices;
         $totalIncomes = Income::where('bank_account_id', $bankAccountId)->sum('amount');
 
-        $saves = $totalIncomes - $totalInvoices; /*all time, monthly save to do*/
-        $totalInvoices; /*all time, monthly save to do*/
+        $thisMonthIncome = Income::whereMonth('created_at',Carbon::now()->month)->sum('amount');
+        $thisMonthInvoice = Invoice::whereMonth('created_at',Carbon::now()->month)->sum('amount');
+
+        $thisMonthSaves = $thisMonthIncome - $thisMonthInvoice;
 
         return Inertia::render('Dashboard',[
             'totalInvoices' => $totalInvoices,
             'avgInvoices' => $avgInvoices,
             'totalIncomes' => $totalIncomes,
-            'saves' => $saves,
+            'totalBalance' => $totalBalance,
+
+            'thisMonthSaves' => $thisMonthSaves,
+            'thisMonthIncome' => $thisMonthIncome,
+            'thisMonthInvoice' => $thisMonthInvoice,
         ]);
     }
 }

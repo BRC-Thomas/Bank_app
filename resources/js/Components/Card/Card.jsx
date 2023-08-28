@@ -2,7 +2,7 @@ import Dot from './Dot.jsx'
 import Title from "./Title.jsx";
 import Subtitle from "@/Components/Card/Subtitle.jsx";
 import { Link } from '@inertiajs/react'
-export default function Card({title, subtitle, user, type,  totalInvoices, totalIncomes, saves}){
+export default function Card({title, subtitle, user, type,  totalInvoices, incomes, saves,thisMonthSaves, thisMonthIncome, thisMonthInvoice}){
     return (
         <>
         <section
@@ -16,7 +16,7 @@ export default function Card({title, subtitle, user, type,  totalInvoices, total
             <div>
                 <Link href={`${type}`}>
                     <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                        {type === 'save' ? `${saves.toFixed(2)}` : (type === 'invoice' ? `${totalInvoices.toFixed(2)}` : totalIncomes.toFixed(2))} $
+                        {type === 'save' ? `${thisMonthSaves}` : (type === 'invoice' ? `${thisMonthInvoice}` : thisMonthIncome)} $
                     </p>
                 </Link>
             </div>
