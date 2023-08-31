@@ -4,9 +4,12 @@ OTHER CARDS (dot)POPUP DETAIL -> INDEX
 
 percentage avg month by month, compare to month -1 + rename to "last month"
 
-
+### P.0 ###
 Analitics Report :
 Set real data from database
+btn 1month 6month + custom range
+### P.0 ###
+
 
 
 Card :
@@ -18,17 +21,17 @@ set goals and set real data in card
 details goal + clickable
 modify on hover bg color
 
-
+### P.1 ###
 Recent Invoice:
 Show real data (3last one + paginate)
 recipent ??
 
 
 Invoice / Income :
-Action btn, edit delete
+
 
 Saves:
-monthly saves
+
 
 
 

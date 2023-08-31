@@ -2,7 +2,26 @@ import Dot from './Dot.jsx'
 import Title from "./Title.jsx";
 import Subtitle from "@/Components/Card/Subtitle.jsx";
 import { Link } from '@inertiajs/react'
-export default function Card({title, subtitle, user, type,  totalInvoices, incomes, saves,thisMonthSaves, thisMonthIncome, thisMonthInvoice}){
+export default function Card({title, subtitle, user, type,  totalInvoices, incomes, saves,thisMonthSaves, thisMonthIncome, thisMonthInvoice, variationIncome, variationInvoice, variation}){
+
+    const getSvgClasses = (value) => {
+        if (value < 0) {
+            return 'rotate-45';
+        }
+        return '';
+    }
+    const getBackgroundColor = () => {
+        if (type === 'save') {
+            return `bg-${variation > 0 ? 'green' : 'red'}-100/75`;
+        } else if (type === 'invoice') {
+            return `bg-${variationInvoice > 0 ? 'green' : 'red'}-100/75`;
+        } else {
+            return `bg-${variationIncome > 0 ? 'green' : 'red'}-100/75`;
+        }
+    };
+
+/*a finir*/
+
     return (
         <>
         <section
@@ -24,11 +43,14 @@ export default function Card({title, subtitle, user, type,  totalInvoices, incom
             <div className='flex justify-between items-center'>
                 <p><Subtitle  subtitle={subtitle} /></p>
 
-                <div className='flex bg-emerald-100/75 p-1 rounded'>
-                    <span className="text-xs text-green-600 font-medium"> 0%  </span>
+                <div className={`flex p-1 rounded ${getBackgroundColor()}`} >
+                    <span className="text-xs  font-medium">
+                        {type === 'save' ? `${variation}` : (type === 'invoice' ? `${variationInvoice}` : variationIncome)}%
+                    </span>
+
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 ml-0.5"
+                        className={`h-4 w-4 ml-0.5 ${getSvgClasses(variation)}`}
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="#16a34a"

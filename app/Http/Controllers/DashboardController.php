@@ -28,6 +28,12 @@ class DashboardController extends Controller
         $thisMonthIncome = Income::whereMonth('created_at',Carbon::now()->month)->sum('amount');
         $thisMonthInvoice = Invoice::whereMonth('created_at',Carbon::now()->month)->sum('amount');
 
+        $lastMonthIncome = Income::whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
+        $lastMonthInvoice = Invoice::whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
+
+        $variationIncome = $this->getVariation($thisMonthIncome, $lastMonthIncome);
+        $variationInvoice = $this->getVariation($thisMonthInvoice, $lastMonthInvoice);
+
         $thisMonthSaves = $thisMonthIncome - $thisMonthInvoice;
 
         return Inertia::render('Dashboard',[
@@ -39,6 +45,18 @@ class DashboardController extends Controller
             'thisMonthSaves' => $thisMonthSaves,
             'thisMonthIncome' => $thisMonthIncome,
             'thisMonthInvoice' => $thisMonthInvoice,
+
+            'variationIncome' => $variationIncome,
+            'variationInvoice' => $variationInvoice
         ]);
+    }
+
+    function getVariation($lastMonth, $thisMonth) {
+        if ($lastMonth === 0) {
+            return 0;
+        }
+
+        $variation = (($thisMonth - $lastMonth) / $lastMonth) * 100;
+        return round($variation);
     }
 }
