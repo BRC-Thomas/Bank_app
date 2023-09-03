@@ -2,31 +2,24 @@ import Dot from './Dot.jsx'
 import Title from "./Title.jsx";
 import Subtitle from "@/Components/Card/Subtitle.jsx";
 import { Link } from '@inertiajs/react'
-export default function Card({title, subtitle, user, type,  totalInvoices, incomes, saves,thisMonthSaves, thisMonthIncome, thisMonthInvoice, variationIncome, variationInvoice, variation}){
-
-    const getSvgClasses = (value) => {
-        if (value < 0) {
-            return 'rotate-45';
+import Variation from "../svg/Variation.jsx";
+export default function Card({title, subtitle, user, type,  totalInvoices, incomes, saves,thisMonthSave, thisMonthIncome, thisMonthInvoice, variationIncome, variationInvoice, variationSave}){
+    const getBackgroundColor = (type, variationSave, variationIncome, variationInvoice) => {
+        if (type === 'save') {
+            return `bg-${variationSave >= 0 ? 'green' : 'red'}-600`;
+        } else if (type === 'invoice') {
+            console.log('invoice ready')
+            return `bg-${variationInvoice >= 0 ? 'green' : 'red'}-600`;
+        } else if (type === 'income') {
+            console.log(variationIncome)
+            return `bg-${variationIncome >= 0 ? 'green' : 'red'}-600`;
         }
         return '';
-    }
-    const getBackgroundColor = () => {
-        if (type === 'save') {
-            return `bg-${variation > 0 ? 'green' : 'red'}-100/75`;
-        } else if (type === 'invoice') {
-            return `bg-${variationInvoice > 0 ? 'green' : 'red'}-100/75`;
-        } else {
-            return `bg-${variationIncome > 0 ? 'green' : 'red'}-100/75`;
-        }
     };
-
-/*a finir*/
 
     return (
         <>
-        <section
-            className="relatvie flex-col max-w-[80vw] mx-auto items-end justify-between rounded-lg border border-gray-100 bg-white p-4 relative sm:max-w-full"
-        >
+        <section className="relatvie flex-col max-w-[80vw] mx-auto items-end justify-between rounded-lg border border-gray-100 bg-white p-4 relative sm:max-w-full">
             <div className='flex justify-between items-center'>
                 <Title title={title}/>
                 <Dot type={type} />
@@ -35,34 +28,17 @@ export default function Card({title, subtitle, user, type,  totalInvoices, incom
             <div>
                 <Link href={`${type}`}>
                     <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                        {type === 'save' ? `${thisMonthSaves}` : (type === 'invoice' ? `${thisMonthInvoice}` : thisMonthIncome)} $
+                        {type === 'save' ? `${thisMonthSave}` : (type === 'invoice' ? `${thisMonthInvoice}` : thisMonthIncome)} $
                     </p>
                 </Link>
             </div>
 
             <div className='flex justify-between items-center'>
                 <p><Subtitle  subtitle={subtitle} /></p>
-
-                <div className={`flex p-1 rounded ${getBackgroundColor()}`} >
-                    <span className="text-xs  font-medium">
-                        {type === 'save' ? `${variation}` : (type === 'invoice' ? `${variationInvoice}` : variationIncome)}%
-                    </span>
-
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 ml-0.5 ${getSvgClasses(variation)}`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="#16a34a"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                        />
-                    </svg>
+                <div className={`flex items-center justify-center py-1 px-1.5 rounded bg-opacity-80 ${getBackgroundColor(type, variationSave, variationIncome, variationInvoice)}`}>
+                    <Variation type={type} variationIncome={variationIncome} variationInvoice={variationInvoice} variationSave={variationSave}/>
                 </div>
+
             </div>
         </section>
         </>

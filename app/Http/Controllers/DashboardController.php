@@ -25,16 +25,22 @@ class DashboardController extends Controller
         $totalBalance = $totalIncome - $totalInvoices;
         $totalIncomes = Income::where('bank_account_id', $bankAccountId)->sum('amount');
 
+        /* START This Month / Last Month */
+
         $thisMonthIncome = Income::whereMonth('created_at',Carbon::now()->month)->sum('amount');
         $thisMonthInvoice = Invoice::whereMonth('created_at',Carbon::now()->month)->sum('amount');
 
         $lastMonthIncome = Income::whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
         $lastMonthInvoice = Invoice::whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
 
-        $variationIncome = $this->getVariation($thisMonthIncome, $lastMonthIncome);
-        $variationInvoice = $this->getVariation($thisMonthInvoice, $lastMonthInvoice);
+        $lastMonthSave = $lastMonthIncome - $lastMonthInvoice;
+        $thisMonthSave = $thisMonthIncome - $thisMonthInvoice;
 
-        $thisMonthSaves = $thisMonthIncome - $thisMonthInvoice;
+        /* END This Month / Last Month */
+
+        $variationIncome = $this->getVariation($lastMonthIncome, $thisMonthIncome);
+        $variationInvoice = $this->getVariation($lastMonthInvoice, $thisMonthInvoice);
+        $variationSave = $this->getVariation($lastMonthSave, $thisMonthSave);
 
         return Inertia::render('Dashboard',[
             'totalInvoices' => $totalInvoices,
@@ -42,12 +48,13 @@ class DashboardController extends Controller
             'totalIncomes' => $totalIncomes,
             'totalBalance' => $totalBalance,
 
-            'thisMonthSaves' => $thisMonthSaves,
+            'thisMonthSave' => $thisMonthSave,
             'thisMonthIncome' => $thisMonthIncome,
             'thisMonthInvoice' => $thisMonthInvoice,
 
             'variationIncome' => $variationIncome,
-            'variationInvoice' => $variationInvoice
+            'variationInvoice' => $variationInvoice,
+            'variationSave' => $variationSave
         ]);
     }
 
