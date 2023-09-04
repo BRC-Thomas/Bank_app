@@ -3,7 +3,7 @@ const Variation = ({type, variationIncome, variationInvoice, variationSave}) => 
         if (type === 'save') {
             return variation >= 0 ? '#14532d' : '#7f1d1d';
         } else if (type === 'invoice') {
-            return variationInvoice >= 0 ? '#14532d' : '#7f1d1d';
+            return variationInvoice >= 0 ? '#7f1d1d' : '#14532d';
         } else if (type === 'income') {
             return variationIncome >= 0 ? '#14532d' : '#7f1d1d';
         }
@@ -11,11 +11,13 @@ const Variation = ({type, variationIncome, variationInvoice, variationSave}) => 
     }
 
     const getSvgClasses = (variationSave, variationIncome, variationInvoice) => {
-        if (variationSave || variationIncome || variationInvoice < 0) {
-            return 'rotate-[60deg]';
+        if (variationSave < 0 || variationIncome < 0 || variationInvoice < 0) {
+            return 'rotate-[160deg]';
         }
         return '';
     }
+
+
 
     const color = getSvgColor(type, variationSave, variationIncome, variationInvoice);
     const rotation = getSvgClasses(variationSave, variationIncome, variationInvoice);

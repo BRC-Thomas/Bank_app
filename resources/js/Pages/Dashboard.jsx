@@ -10,7 +10,6 @@ import ChartFullComponent from "@/Components/Chart/ChartFullComponent.jsx";
 import Invoice from "@/Components/Invoice/Invoice.jsx";
 
 export default function Dashboard({auth, totalInvoices, avgInvoices, totalIncomes,saves, thisMonthSave, thisMonthIncome, thisMonthInvoice, totalBalance, variationIncome, variationInvoice, variationSave}) {
-    console.log(variationIncome)
     return (
         <AuthenticatedLayout
             user={auth.user}

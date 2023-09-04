@@ -8,10 +8,8 @@ export default function Card({title, subtitle, user, type,  totalInvoices, incom
         if (type === 'save') {
             return `bg-${variationSave >= 0 ? 'green' : 'red'}-600`;
         } else if (type === 'invoice') {
-            console.log('invoice ready')
-            return `bg-${variationInvoice >= 0 ? 'green' : 'red'}-600`;
+            return `bg-${variationInvoice >= 0 ? 'red' : 'green'}-600`;
         } else if (type === 'income') {
-            console.log(variationIncome)
             return `bg-${variationIncome >= 0 ? 'green' : 'red'}-600`;
         }
         return '';

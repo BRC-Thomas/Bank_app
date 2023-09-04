@@ -12,7 +12,7 @@ export default function CreditCardContent({type, totalBalance}) {
                 <div className='flex justify-between'>
                     <div>
                         <Title title='Total Balance'/>
-                        <p className='flex items-baseline text-2xl font-bold'>${totalBalance} <Subtitle subtitle='USD' className='ml-1 font-medium'/>
+                        <p className={`flex items-baseline text-2xl font-bold ${totalBalance < 0 ? 'text-red-600' : ''}`}>${totalBalance} <Subtitle subtitle='USD' className='ml-1 font-medium'/>
                         </p>
                     </div>
                     <div className='flex justify-between w-1/2 gap-2'>
