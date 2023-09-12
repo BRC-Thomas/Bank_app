@@ -3,7 +3,6 @@ import Subtitle from "@/Components/Card/Subtitle.jsx";
 import Title from "@/Components/Card/Title.jsx";
 
 export default function Chart({jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec}) {
-    console.log(jan)
     const data = [
         {
             name: 'Jan',

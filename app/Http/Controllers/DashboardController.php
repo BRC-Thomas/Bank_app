@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BankAccount;
 use App\Models\Income;
 use App\Models\Invoice;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
@@ -42,6 +40,8 @@ class DashboardController extends Controller
         $variationInvoice = $this->getVariation($lastMonthInvoice, $thisMonthInvoice);
         $variationSave = $this->getVariation($lastMonthSave, $thisMonthSave);
 
+        /* Recent Invoice */
+        $recentInvoice = Invoice::where('bank_account_id', $bankAccountId)->orderBy('created_at', 'desc')->paginate(3);
         /* All months saves */
         $jan = Income::whereMonth('created_at',1)->sum('amount') - Invoice::whereMonth('created_at',1)->sum('amount');
         $feb = Income::whereMonth('created_at',2)->sum('amount') - Invoice::whereMonth('created_at',2)->sum('amount');
@@ -82,6 +82,8 @@ class DashboardController extends Controller
             'oct' => $oct,
             'nov' => $nov,
             'dec' => $dec,
+
+            'recentInvoice' => $recentInvoice
         ]);
     }
 

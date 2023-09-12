@@ -1,8 +1,4 @@
-Card TODO :
-
-OTHER CARDS (dot)POPUP DETAIL -> INDEX
-
-percentage avg month by month, compare to month -1 + rename to "last month"
+TODO :
 
 ### P.0 ###
 Analitics Report :
@@ -11,9 +7,8 @@ btn 1month 6month + custom range
 ### P.0 ###
 
 
-
 Card :
-format xxx xxx,xx
+format xxx xxx,xx  thousands separator
 
 
 Goals :
@@ -37,3 +32,7 @@ Saves:
 
 FIX :
 msg flah
+
+
+DashboardController :
+REFACTO methods

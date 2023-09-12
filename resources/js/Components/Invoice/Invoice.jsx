@@ -1,7 +1,6 @@
 import Title from "@/Components/Card/Title.jsx";
 
-export default function Invoice() {
-
+export default function Invoice({recentInvoice}) {
     return (
         <div className="relative overflow-x-auto bg-white rounded-lg sm:-mt-10 lg:mt-0">
             <div className='flex justify-between items-center px-4 py-2'>
@@ -33,72 +32,86 @@ export default function Invoice() {
                 </tr>
                 </thead>
                 <tbody className='[&>*:nth-child(even)]:bg-slate-100/80'>
-                <tr className="bg-white border-b">
-                    <th scope="row"
-                        className="flex align-baseline px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <img src="/images/PayPal_Logo.png" alt="" className='w-4 mr-2'/>Paypal
-                    </th>
-                    <td className="px-6 py-4">
-                        Thu 26 Jan
-                    </td>
-                    <td className="px-6 py-4">
-                        A2331
-                    </td>
-                    <td className="px-6 py-4">
-                        $400.00
-                    </td>
-                    <td className="px-6 py-4 text-center text-green-500">
-                        <p className='bg-green-200/40 rounded py-1'>
-                            Success
-                        </p>
-                    </td>
-                </tr>
-                <tr className="bg-white border-b">
-                    <th scope="row"
-                        className="flex align-baseline px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <img src="/images/icons8-mastercard-48.png" alt="mastercard logo" className='w-5 mr-2'/>MasterCard
-                    </th>
-                    <td className="px-6 py-4">
-                        Thu 26 Jan
-                    </td>
-                    <td className="px-6 py-4">
-                        A2330
-                    </td>
-                    <td className="px-6 py-4">
-                        $688.80
-                    </td>
-                    <td className="px-6 py-4 text-center text-green-500">
-                        <p className='bg-green-200/40 rounded py-1'>
-                            Success
-                        </p>
-                    </td>
-                </tr>
-                <tr className="bg-white border-b">
-                    <th scope="row"
-                        className="flex align-baseline px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        <img src="/images/icons8-mastercard-48.png" alt="mastercard logo" className='w-5 mr-2'/>MasterCard
-                    </th>
-                    <td className="px-6 py-4">
-                        Mon 23 Jan
-                    </td>
-                    <td className="px-6 py-4">
-                        A2329
-                    </td>
-                    <td className="px-6 py-4">
-                        $36.50
-                    </td>
-                    <td className="px-6 py-4 text-center text-green-500">
-                        <p className='bg-green-200/40 rounded py-1'>
-                            Success
-                        </p>
-                    </td>
-                </tr>
-
+                {recentInvoice.data.map((item)=> {
+                    const date = "2023-09-12T17:34:21.000000Z";
+                    const dateObj = new Date(item.created_at);
+                    const options = {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                    };
+                    const formattedDate = dateObj.toLocaleString('fr-FR', options);
+                    return (
+                        <>
+                            <tr className="bg-white border-b">
+                                <th scope="row"
+                                    className="flex align-baseline px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    <img src="/images/icons8-mastercard-48.png" alt="mastercard logo" className='w-5 mr-2'/>MasterCard
+                                </th>
+                                <td className="px-6 py-4">
+                                    {formattedDate}
+                                </td>
+                                <td className="px-6 py-4">
+                                    INV{item.id}
+                                </td>
+                                <td className="px-6 py-4">
+                                    ${item.amount}
+                                </td>
+                                <td className="px-6 py-4 text-center text-green-500">
+                                    <p className='bg-green-200/40 rounded py-1'>
+                                        Success
+                                    </p>
+                                </td>
+                            </tr>
+                    </>
+                    )
+                })}
+                            {/*TODO PAGINATION A FAIRE*/}
+                {/*
+                    <tr className="bg-white border-b">
+                            <th scope="row"
+                                className="flex align-baseline px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                <img src="/images/icons8-mastercard-48.png" alt="mastercard logo" className='w-5 mr-2'/>MasterCard
+                            </th>
+                            <td className="px-6 py-4">
+                                Thu 26 Jan
+                            </td>
+                            <td className="px-6 py-4">
+                                A2330
+                            </td>
+                            <td className="px-6 py-4">
+                                $688.80
+                            </td>
+                            <td className="px-6 py-4 text-center text-green-500">
+                                <p className='bg-green-200/40 rounded py-1'>
+                                    Success
+                                </p>
+                            </td>
+                        </tr>
+                        <tr className="bg-white border-b">
+                            <th scope="row"
+                                className="flex align-baseline px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                <img src="/images/icons8-mastercard-48.png" alt="mastercard logo" className='w-5 mr-2'/>MasterCard
+                            </th>
+                            <td className="px-6 py-4">
+                                Mon 23 Jan
+                            </td>
+                            <td className="px-6 py-4">
+                                A2329
+                            </td>
+                            <td className="px-6 py-4">
+                                $36.50
+                            </td>
+                            <td className="px-6 py-4 text-center text-green-500">
+                                <p className='bg-green-200/40 rounded py-1'>
+                                    Success
+                                </p>
+                            </td>
+                        </tr>
+                */}
                 </tbody>
             </table>
-
-
-            <ol className="flex justify-center gap-1 text-xs font-medium my-4">
+          {/*  <ol className="flex justify-center gap-1 text-xs font-medium my-4">
                 <li>
                     <a
                         href="#"
@@ -173,7 +186,7 @@ export default function Invoice() {
                         </svg>
                     </a>
                 </li>
-            </ol>
+            </ol>*/}
         </div>
 
     )

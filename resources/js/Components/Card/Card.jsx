@@ -10,7 +10,6 @@ export default function Card({title, subtitle, user, type,  totalInvoices, incom
         } else if (type === 'invoice') {
             return `${variationInvoice >= 0 ? 'bg-red' : 'bg-green'}-600`;
         } else if (type === 'income') {
-            console.log(variationIncome)
             return `${variationIncome >= 0 ? 'bg-green' : 'bg-red'}-600`;
         }
         return '';
@@ -34,7 +33,7 @@ export default function Card({title, subtitle, user, type,  totalInvoices, incom
 
             <div className='flex justify-between items-center'>
                 <p><Subtitle  subtitle={subtitle} /></p>
-                <div className={`flex items-center justify-center py-1 px-1.5 rounded bg-opacity-80 ${getBackgroundColor(type, variationSave, variationIncome, variationInvoice)}`}>
+                <div className={`flex items-center justify-center py-1 px-1.5 rounded ${getBackgroundColor(type, variationSave, variationIncome, variationInvoice)} bg-opacity-70 hover:bg-opacity-100 transition-colors`}>
                     <Variation type={type} variationIncome={variationIncome} variationInvoice={variationInvoice} variationSave={variationSave}/>
                 </div>
 
