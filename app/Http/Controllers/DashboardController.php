@@ -42,6 +42,20 @@ class DashboardController extends Controller
         $variationInvoice = $this->getVariation($lastMonthInvoice, $thisMonthInvoice);
         $variationSave = $this->getVariation($lastMonthSave, $thisMonthSave);
 
+        /* All months saves */
+        $jan = Income::whereMonth('created_at',1)->sum('amount') - Invoice::whereMonth('created_at',1)->sum('amount');
+        $feb = Income::whereMonth('created_at',2)->sum('amount') - Invoice::whereMonth('created_at',2)->sum('amount');
+        $mar = Income::whereMonth('created_at',3)->sum('amount') - Invoice::whereMonth('created_at',3)->sum('amount');
+        $apr = Income::whereMonth('created_at',4)->sum('amount') - Invoice::whereMonth('created_at',4)->sum('amount');
+        $may = Income::whereMonth('created_at',5)->sum('amount') - Invoice::whereMonth('created_at',5)->sum('amount');
+        $jun = Income::whereMonth('created_at',6)->sum('amount') - Invoice::whereMonth('created_at',6)->sum('amount');
+        $jul = Income::whereMonth('created_at',7)->sum('amount') - Invoice::whereMonth('created_at',7)->sum('amount');
+        $aug = Income::whereMonth('created_at',8)->sum('amount') - Invoice::whereMonth('created_at',8)->sum('amount');
+        $sep = Income::whereMonth('created_at',9)->sum('amount') - Invoice::whereMonth('created_at',9)->sum('amount');
+        $oct = Income::whereMonth('created_at',10)->sum('amount') - Invoice::whereMonth('created_at',10)->sum('amount');
+        $nov = Income::whereMonth('created_at',11)->sum('amount') - Invoice::whereMonth('created_at',11)->sum('amount');
+        $dec = Income::whereMonth('created_at',12)->sum('amount') - Invoice::whereMonth('created_at',12)->sum('amount');
+
         return Inertia::render('Dashboard',[
             'totalInvoices' => $totalInvoices,
             'avgInvoices' => $avgInvoices,
@@ -54,7 +68,20 @@ class DashboardController extends Controller
 
             'variationIncome' => $variationIncome,
             'variationInvoice' => $variationInvoice,
-            'variationSave' => $variationSave
+            'variationSave' => $variationSave,
+
+            'jan' => $jan,
+            'feb' => $feb,
+            'mar' => $mar,
+            'apr' => $apr,
+            'may' => $may,
+            'jun' => $jun,
+            'jul' => $jul,
+            'aug' => $aug,
+            'sep' => $sep,
+            'oct' => $oct,
+            'nov' => $nov,
+            'dec' => $dec,
         ]);
     }
 

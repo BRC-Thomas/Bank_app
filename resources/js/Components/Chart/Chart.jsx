@@ -2,62 +2,57 @@ import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAx
 import Subtitle from "@/Components/Card/Subtitle.jsx";
 import Title from "@/Components/Card/Title.jsx";
 
-export default function Chart() {
+export default function Chart({jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec}) {
+    console.log(jan)
     const data = [
         {
             name: 'Jan',
-            $total: 300,
-            pv: 2400,
-            amt: 2400,
+            $total:jan,
         },
         {
             name: 'Feb',
-            $total: 2000,
-            pv: 1398,
-            amt: 2210,
+            $total: feb,
         },
         {
             name: 'Mar',
-            $total: 2590,
-            pv: 9800,
-            amt: 2290,
+            $total: mar,
         },
         {
             name: 'Apr',
-            $total: 1100,
-            pv: 3908,
-            amt: 2000,
+            $total: apr,
         },
         {
             name: 'May',
-            $total: 800,
-            pv: 4800,
-            amt: 2181,
+            $total: may,
         },
         {
             name: 'Jun',
-            $total: 2390,
-            pv: 3800,
-            amt: 2500,
+            $total: jun,
         },
         {
             name: 'Jul',
-            $total: 3490,
-            pv: 4300,
-            amt: 2100,
+            $total: jul,
         },
         {
             name: 'Aug',
-            $total: 6000,
-            pv: 4300,
-            amt: 2100,
+            $total: aug,
         },
         {
             name: 'Sep',
-            $total: 7500,
-            pv: 4300,
-            amt: 2100,
+            $total: sep,
         },
+        {
+            name: 'Oct',
+            $total: oct,
+        },
+        {
+            name: 'Nov',
+            $total: nov,
+        },
+        {
+            name: 'Dec',
+            $total: dec,
+        }
     ];
 
     const getFullMonthName = (month) => {
@@ -80,6 +75,12 @@ export default function Chart() {
                 return "August";
             case "Sep":
                 return "September";
+            case "Oct":
+                return "October";
+            case "Nov":
+                return "November";
+            case "Dec":
+                return "December";
             default:
                 return month;
         }
