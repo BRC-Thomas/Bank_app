@@ -6,11 +6,12 @@ import Variation from "../svg/Variation.jsx";
 export default function Card({title, subtitle, user, type,  totalInvoices, incomes, saves,thisMonthSave, thisMonthIncome, thisMonthInvoice, variationIncome, variationInvoice, variationSave}){
     const getBackgroundColor = (type, variationSave, variationIncome, variationInvoice) => {
         if (type === 'save') {
-            return `bg-${variationSave >= 0 ? 'green' : 'red'}-600`;
+            return `${variationSave >= 0 ? 'bg-green' : 'bg-red'}-600`;
         } else if (type === 'invoice') {
-            return `bg-${variationInvoice >= 0 ? 'red' : 'green'}-600`;
+            return `${variationInvoice >= 0 ? 'bg-red' : 'bg-green'}-600`;
         } else if (type === 'income') {
-            return `bg-${variationIncome >= 0 ? 'green' : 'red'}-600`;
+            console.log(variationIncome)
+            return `${variationIncome >= 0 ? 'bg-green' : 'bg-red'}-600`;
         }
         return '';
     };
