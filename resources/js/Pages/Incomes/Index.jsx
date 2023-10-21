@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 
 export default function Index({auth, incomes, totalInvoices}) {
-    console.log(incomes)
     const { flash } = usePage().props
     const [showFlash, setShowFlash] = useState(false);
     const hideFlash = () => {

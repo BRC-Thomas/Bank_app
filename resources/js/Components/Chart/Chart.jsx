@@ -2,8 +2,11 @@ import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAx
 import Subtitle from "@/Components/Card/Subtitle.jsx";
 import Title from "@/Components/Card/Title.jsx";
 
-export default function Chart({jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec}) {
-    const data = [
+export default function Chart({monthlySaves, jan}) {
+    console.log(monthlySaves)
+    console.log('janvier',jan)
+    const data = null
+    /*const data = [
         {
             name: 'Jan',
             $total:jan,
@@ -52,9 +55,9 @@ export default function Chart({jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec})
             name: 'Dec',
             $total: dec,
         }
-    ];
+    ];*/
 
-    const getFullMonthName = (month) => {
+    /*const getFullMonthName = (month) => {
         switch (month) {
             case "Jan":
                 return "January";
@@ -84,7 +87,7 @@ export default function Chart({jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec})
                 return month;
         }
     };
-
+*/
     const CustomTooltip = ({active, payload, label}) => {
         if (active && payload && payload.length) {
             const fullMonthName = getFullMonthName(label);

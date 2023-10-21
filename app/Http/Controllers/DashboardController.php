@@ -14,22 +14,26 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
         $bankAccountId = $user->bankAccount->id;
+        $invoice = Invoice::where('bank_account_id', $bankAccountId);
+        $income = Income::where('bank_account_id', $bankAccountId);
+        dd($bankAccountId);
+        $invoicesCount = $invoice->count();
+        $totalInvoices = $invoice->sum('amount');
+        $totalIncomes = $income->sum('amount');
 
-        $invoicesCount = Invoice::where('bank_account_id', $bankAccountId)->count();
-        $totalInvoices = Invoice::where('bank_account_id', $bankAccountId)->sum('amount');
-        $totalIncome = Income::where('bank_account_id', $bankAccountId)->sum('amount');
         $avgInvoices = $invoicesCount > 0 ? $totalInvoices / $invoicesCount : 0;
 
-        $totalBalance = $totalIncome - $totalInvoices;
-        $totalIncomes = Income::where('bank_account_id', $bankAccountId)->sum('amount');
+        $totalBalance = $totalIncomes - $totalInvoices;
 
         /* START This Month / Last Month */
 
-        $thisMonthIncome = Income::whereMonth('created_at',Carbon::now()->month)->sum('amount');
-        $thisMonthInvoice = Invoice::whereMonth('created_at',Carbon::now()->month)->sum('amount');
+        $thisMonthIncome = $this->getThisMonthIncome($income);
+        $thisMonthInvoice = $this->getThisMonthInvoice($invoice);
 
-        $lastMonthIncome = Income::whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
-        $lastMonthInvoice = Invoice::whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
+
+        $lastMonthIncome = $this->getLastMonthIncome($income);
+        $lastMonthInvoice = $this->getLastMonthInvoice($invoice);
+
 
         $lastMonthSave = $lastMonthIncome - $lastMonthInvoice;
         $thisMonthSave = $thisMonthIncome - $thisMonthInvoice;
@@ -41,20 +45,23 @@ class DashboardController extends Controller
         $variationSave = $this->getVariation($lastMonthSave, $thisMonthSave);
 
         /* Recent Invoice */
-        $recentInvoice = Invoice::where('bank_account_id', $bankAccountId)->orderBy('created_at', 'desc')->paginate(3);
+        $recentInvoice = $invoice->where('bank_account_id', $bankAccountId)->orderBy('created_at', 'desc')->paginate(3);
+
         /* All months saves */
-        $jan = Income::whereMonth('created_at',1)->sum('amount') - Invoice::whereMonth('created_at',1)->sum('amount');
-        $feb = Income::whereMonth('created_at',2)->sum('amount') - Invoice::whereMonth('created_at',2)->sum('amount');
-        $mar = Income::whereMonth('created_at',3)->sum('amount') - Invoice::whereMonth('created_at',3)->sum('amount');
-        $apr = Income::whereMonth('created_at',4)->sum('amount') - Invoice::whereMonth('created_at',4)->sum('amount');
-        $may = Income::whereMonth('created_at',5)->sum('amount') - Invoice::whereMonth('created_at',5)->sum('amount');
-        $jun = Income::whereMonth('created_at',6)->sum('amount') - Invoice::whereMonth('created_at',6)->sum('amount');
-        $jul = Income::whereMonth('created_at',7)->sum('amount') - Invoice::whereMonth('created_at',7)->sum('amount');
-        $aug = Income::whereMonth('created_at',8)->sum('amount') - Invoice::whereMonth('created_at',8)->sum('amount');
-        $sep = Income::whereMonth('created_at',9)->sum('amount') - Invoice::whereMonth('created_at',9)->sum('amount');
-        $oct = Income::whereMonth('created_at',10)->sum('amount') - Invoice::whereMonth('created_at',10)->sum('amount');
-        $nov = Income::whereMonth('created_at',11)->sum('amount') - Invoice::whereMonth('created_at',11)->sum('amount');
-        $dec = Income::whereMonth('created_at',12)->sum('amount') - Invoice::whereMonth('created_at',12)->sum('amount');
+        $monthlySaves = $this->calculateMonthlySaves($income, $invoice);
+
+         /* $jan = $income->whereMonth('created_at',1)->sum('amount') - $invoice->whereMonth('created_at',1)->sum('amount');
+          $feb = $income->whereMonth('created_at',2)->sum('amount') - $invoice->whereMonth('created_at',2)->sum('amount');
+          $mar = $income->whereMonth('created_at',3)->sum('amount') - $invoice->whereMonth('created_at',3)->sum('amount');
+          $apr = $income->whereMonth('created_at',4)->sum('amount') - $invoice->whereMonth('created_at',4)->sum('amount');
+          $may = $income->whereMonth('created_at',5)->sum('amount') - $invoice->whereMonth('created_at',5)->sum('amount');
+          $jun = $income->whereMonth('created_at',6)->sum('amount') - $invoice->whereMonth('created_at',6)->sum('amount');
+          $jul = $income->whereMonth('created_at',7)->sum('amount') - $invoice->whereMonth('created_at',7)->sum('amount');
+          $aug = $income->whereMonth('created_at',8)->sum('amount') - $invoice->whereMonth('created_at',8)->sum('amount');
+          $sep = $income->whereMonth('created_at',9)->sum('amount') - $invoice->whereMonth('created_at',9)->sum('amount');
+          $oct = $income->whereMonth('created_at',10)->sum('amount') - $invoice->whereMonth('created_at',10)->sum('amount');
+          $nov = $income->whereMonth('created_at',11)->sum('amount') - $invoice->whereMonth('created_at',11)->sum('amount');
+          $dec = $income->whereMonth('created_at',12)->sum('amount') - $invoice->whereMonth('created_at',12)->sum('amount');*/
 
         return Inertia::render('Dashboard',[
             'totalInvoices' => $totalInvoices,
@@ -70,7 +77,8 @@ class DashboardController extends Controller
             'variationInvoice' => $variationInvoice,
             'variationSave' => $variationSave,
 
-            'jan' => $jan,
+            'monthlySaves' => $monthlySaves,
+           'jan' => $jan,
             'feb' => $feb,
             'mar' => $mar,
             'apr' => $apr,
@@ -87,7 +95,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    function getVariation($lastMonth, $thisMonth) {
+    private function getVariation($lastMonth, $thisMonth) {
         if ($lastMonth === 0) {
             return 0;
         }
@@ -95,4 +103,38 @@ class DashboardController extends Controller
         $variation = (($thisMonth - $lastMonth) / $lastMonth) * 100;
         return round($variation);
     }
+
+    private function getThisMonthIncome($income)
+    {
+        return $income->whereMonth('created_at',Carbon::now()->month)->sum('amount');
+    }
+
+    private function getThisMonthInvoice($invoice)
+    {
+        return $invoice->whereMonth('created_at',Carbon::now()->month)->sum('amount');
+    }
+
+    private function getLastMonthIncome($income)
+    {
+        return $income->whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
+    }
+
+    private function getLastMonthInvoice($invoice)
+    {
+        return $invoice->whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
+    }
+
+    private function calculateMonthlySaves($income, $invoice)
+    {
+        $monthlySaves = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $monthlyIncome = $income->whereMonth('created_at', $month)->sum('amount');
+            $monthlyInvoice = $invoice->whereMonth('created_at', $month)->sum('amount');
+            $monthlySaves['month'.$month] = $monthlyIncome - $monthlyInvoice;
+        }
+
+
+        return $monthlySaves;
+    }
+
 }
