@@ -33,7 +33,6 @@ export default function Invoice({recentInvoice}) {
                 </thead>
                 <tbody className='[&>*:nth-child(even)]:bg-slate-100/80'>
                 {recentInvoice.data.map((item)=> {
-                    const date = "2023-09-12T17:34:21.000000Z";
                     const dateObj = new Date(item.created_at);
                     const options = {
                         year: 'numeric',

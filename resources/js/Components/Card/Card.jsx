@@ -6,11 +6,11 @@ import Variation from "../svg/Variation.jsx";
 export default function Card({title, subtitle, user, type,  totalInvoices, incomes, saves,thisMonthSave, thisMonthIncome, thisMonthInvoice, variationIncome, variationInvoice, variationSave}){
     const getBackgroundColor = (type, variationSave, variationIncome, variationInvoice) => {
         if (type === 'save') {
-            return `${variationSave >= 0 ? 'bg-green' : 'bg-red'}-600`;
+            return `${variationSave >= 0 ? 'bg-green-600' : 'bg-red-600'}`;
         } else if (type === 'invoice') {
-            return `${variationInvoice >= 0 ? 'bg-red' : 'bg-green'}-600`;
+            return `${variationInvoice >= 0 ? 'bg-red-600' : 'bg-green-600'}`;
         } else if (type === 'income') {
-            return `${variationIncome >= 0 ? 'bg-green' : 'bg-red'}-600`;
+            return `${variationIncome >= 0 ? 'bg-green-600' : 'bg-red-600'}`;
         }
         return '';
     };
@@ -33,7 +33,7 @@ export default function Card({title, subtitle, user, type,  totalInvoices, incom
 
             <div className='flex justify-between items-center'>
                 <p><Subtitle  subtitle={subtitle} /></p>
-                <div className={`flex items-center justify-center py-1 px-1.5 rounded ${getBackgroundColor(type, variationSave, variationIncome, variationInvoice)} bg-opacity-70 hover:bg-opacity-100 transition-colors`}>
+                <div className={`flex items-center justify-center py-1 px-1.5 rounded ${getBackgroundColor(type, variationSave, variationIncome, variationInvoice)} bg-opacity-70 hover:bg-opacity-80 transition-colors`}>
                     <Variation type={type} variationIncome={variationIncome} variationInvoice={variationInvoice} variationSave={variationSave}/>
                 </div>
 
