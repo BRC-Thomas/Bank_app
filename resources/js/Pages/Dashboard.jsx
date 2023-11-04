@@ -9,7 +9,7 @@ import './Dashboard.css'
 import ChartFullComponent from "@/Components/Chart/ChartFullComponent.jsx";
 import Invoice from "@/Components/Invoice/Invoice.jsx";
 
-export default function Dashboard({jan, auth, totalInvoices, avgInvoices, totalIncomes,saves, thisMonthSave, thisMonthIncome, thisMonthInvoice, totalBalance, variationIncome, variationInvoice, variationSave, monthlySaves, recentInvoice}) {
+export default function Dashboard({auth, totalInvoices, avgInvoices, totalIncomes,saves, thisMonthSave, thisMonthIncome, thisMonthInvoice, totalBalance, variationIncome, variationInvoice, variationSave, monthlySaves, recentInvoice}) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -69,7 +69,7 @@ export default function Dashboard({jan, auth, totalInvoices, avgInvoices, totalI
 
                         <div
                             className="my-3 sm:my-0 sm:col-span-full md:col-span-full md:row-end-3 lg:row-span-2 lg:col-end-7 w-full">
-                            <ChartFullComponent monthlySaves={monthlySaves} jan={jan}/>
+                            <ChartFullComponent monthlySaves={monthlySaves}/>
                         </div>
                         <div
                             className="my-3 sm:my-0  sm:col-span-full  md:col-span-full lg:row-span-2 lg:col-end-7">

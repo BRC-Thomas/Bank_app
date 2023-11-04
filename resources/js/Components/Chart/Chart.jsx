@@ -1,63 +1,85 @@
-import {Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import Subtitle from "@/Components/Card/Subtitle.jsx";
 import Title from "@/Components/Card/Title.jsx";
+import { useEffect, useState } from "react";
 
-export default function Chart({monthlySaves, jan}) {
-    console.log(monthlySaves)
-    console.log('janvier',jan)
-    const data = null
-    /*const data = [
+export default function Chart({ monthlySaves, selectedPeriod }) {
+    const [filteredData, setFilteredData] = useState([]);
+
+    const data = [
         {
             name: 'Jan',
-            $total:jan,
+            $total: monthlySaves.month1,
         },
         {
             name: 'Feb',
-            $total: feb,
+            $total: monthlySaves.month2,
         },
         {
             name: 'Mar',
-            $total: mar,
+            $total: monthlySaves.month3,
         },
         {
             name: 'Apr',
-            $total: apr,
+            $total: monthlySaves.month4,
         },
         {
             name: 'May',
-            $total: may,
+            $total: monthlySaves.month5,
         },
         {
             name: 'Jun',
-            $total: jun,
+            $total: monthlySaves.month6,
         },
         {
             name: 'Jul',
-            $total: jul,
+            $total: monthlySaves.month7,
         },
         {
             name: 'Aug',
-            $total: aug,
+            $total: monthlySaves.month8,
         },
         {
             name: 'Sep',
-            $total: sep,
+            $total: monthlySaves.month9,
         },
         {
             name: 'Oct',
-            $total: oct,
+            $total: monthlySaves.month10,
         },
         {
             name: 'Nov',
-            $total: nov,
+            $total: monthlySaves.month11,
         },
         {
             name: 'Dec',
-            $total: dec,
+            $total: monthlySaves.month12,
         }
-    ];*/
+    ];
 
-    /*const getFullMonthName = (month) => {
+    useEffect(() => {
+        //lastMonth  thisYear lastSixMonths
+        if(selectedPeriod === 'lastSixMonths'){
+            const currentMonth = new Date().getMonth();
+
+            const startMonthIndex = currentMonth - 5 >= 0 ? currentMonth - 5 : 12 + (currentMonth - 5);
+
+            const filteredData = data.slice(startMonthIndex, currentMonth + 1);
+            setFilteredData(filteredData);
+        } else if (selectedPeriod === 'lastMonth'){
+            const currentMonth = new Date().getMonth();
+
+            const startMonthIndex = currentMonth - 1 >= 0 ? currentMonth - 1 : 12 + (currentMonth - 1);
+
+            const filteredData = data.slice(startMonthIndex, currentMonth + 1);
+            setFilteredData(filteredData);
+        } else {
+            setFilteredData(data);
+        }
+    }, [selectedPeriod]);
+
+
+    const getFullMonthName = (month) => {
         switch (month) {
             case "Jan":
                 return "January";
@@ -87,40 +109,40 @@ export default function Chart({monthlySaves, jan}) {
                 return month;
         }
     };
-*/
-    const CustomTooltip = ({active, payload, label}) => {
+
+    const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
             const fullMonthName = getFullMonthName(label);
             return (
                 <div className="custom-tooltip bg-slate-50 p-2 rounded">
-                    <Subtitle subtitle={fullMonthName}/>
-                    <Title title={`Total: $${payload[0].value}`}/>
+                    <Subtitle subtitle={fullMonthName} />
+                    <Title title={`Total: $${payload[0].value}`} />
                 </div>
             );
         }
 
         return null;
     }
-    return (
 
-        <div style={{width: '100%', height: 300}}>
+    return (
+        <div style={{ width: '100%', height: 300 }}>
             <ResponsiveContainer>
                 <AreaChart
                     width='100%'
                     height={250}
-                    data={data}
-                    margin={{top: 0, right: 0, left: 0, bottom: 0}}
+                    data={filteredData}
+                    margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
                 >
                     <defs>
                         <linearGradient id="color$total" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
                         </linearGradient>
                     </defs>
-                    <XAxis dataKey="name" className={'text-[12px] opacity-60'}/>
-                    <YAxis className={'text-[12px] opacity-60'}/>
-                    <CartesianGrid strokeDasharray="3 3"/>
-                    <Tooltip content={<CustomTooltip/>}/>
+                    <XAxis dataKey="name" className={'text-[12px] opacity-60'} />
+                    <YAxis className={'text-[12px] opacity-60'} />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip content={<CustomTooltip />} />
                     <Area
                         type="monotone"
                         dataKey="$total"

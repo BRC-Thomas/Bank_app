@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $bankAccountId = $user->bankAccount->id;
         $invoice = Invoice::where('bank_account_id', $bankAccountId);
         $income = Income::where('bank_account_id', $bankAccountId);
-        dd($bankAccountId);
+
         $invoicesCount = $invoice->count();
         $totalInvoices = $invoice->sum('amount');
         $totalIncomes = $income->sum('amount');
@@ -48,20 +48,7 @@ class DashboardController extends Controller
         $recentInvoice = $invoice->where('bank_account_id', $bankAccountId)->orderBy('created_at', 'desc')->paginate(3);
 
         /* All months saves */
-        $monthlySaves = $this->calculateMonthlySaves($income, $invoice);
-
-         /* $jan = $income->whereMonth('created_at',1)->sum('amount') - $invoice->whereMonth('created_at',1)->sum('amount');
-          $feb = $income->whereMonth('created_at',2)->sum('amount') - $invoice->whereMonth('created_at',2)->sum('amount');
-          $mar = $income->whereMonth('created_at',3)->sum('amount') - $invoice->whereMonth('created_at',3)->sum('amount');
-          $apr = $income->whereMonth('created_at',4)->sum('amount') - $invoice->whereMonth('created_at',4)->sum('amount');
-          $may = $income->whereMonth('created_at',5)->sum('amount') - $invoice->whereMonth('created_at',5)->sum('amount');
-          $jun = $income->whereMonth('created_at',6)->sum('amount') - $invoice->whereMonth('created_at',6)->sum('amount');
-          $jul = $income->whereMonth('created_at',7)->sum('amount') - $invoice->whereMonth('created_at',7)->sum('amount');
-          $aug = $income->whereMonth('created_at',8)->sum('amount') - $invoice->whereMonth('created_at',8)->sum('amount');
-          $sep = $income->whereMonth('created_at',9)->sum('amount') - $invoice->whereMonth('created_at',9)->sum('amount');
-          $oct = $income->whereMonth('created_at',10)->sum('amount') - $invoice->whereMonth('created_at',10)->sum('amount');
-          $nov = $income->whereMonth('created_at',11)->sum('amount') - $invoice->whereMonth('created_at',11)->sum('amount');
-          $dec = $income->whereMonth('created_at',12)->sum('amount') - $invoice->whereMonth('created_at',12)->sum('amount');*/
+        $monthlySaves = $this->calculateMonthlySaves($bankAccountId);
 
         return Inertia::render('Dashboard',[
             'totalInvoices' => $totalInvoices,
@@ -78,18 +65,6 @@ class DashboardController extends Controller
             'variationSave' => $variationSave,
 
             'monthlySaves' => $monthlySaves,
-           'jan' => $jan,
-            'feb' => $feb,
-            'mar' => $mar,
-            'apr' => $apr,
-            'may' => $may,
-            'jun' => $jun,
-            'jul' => $jul,
-            'aug' => $aug,
-            'sep' => $sep,
-            'oct' => $oct,
-            'nov' => $nov,
-            'dec' => $dec,
 
             'recentInvoice' => $recentInvoice
         ]);
@@ -124,17 +99,17 @@ class DashboardController extends Controller
         return $invoice->whereMonth('created_at',Carbon::now()->month-1)->sum('amount');
     }
 
-    private function calculateMonthlySaves($income, $invoice)
+    private function calculateMonthlySaves($bankAccountId)
     {
         $monthlySaves = [];
         for ($month = 1; $month <= 12; $month++) {
-            $monthlyIncome = $income->whereMonth('created_at', $month)->sum('amount');
-            $monthlyInvoice = $invoice->whereMonth('created_at', $month)->sum('amount');
+            $monthlyIncome = Income::where('bank_account_id', $bankAccountId)->whereMonth('created_at', $month)->get()->sum('amount');
+            $monthlyInvoice = Invoice::where('bank_account_id', $bankAccountId)->whereMonth('created_at', $month)->get()->sum('amount');
             $monthlySaves['month'.$month] = $monthlyIncome - $monthlyInvoice;
         }
-
 
         return $monthlySaves;
     }
 
 }
+
